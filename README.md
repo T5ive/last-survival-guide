@@ -28,3 +28,7 @@ pnpm build
 - [ ] Relics
 - [ ] Arrays
 - [ ] Tricks
+
+## General
+- [ ] Localization
+- [ ] UX/UI
