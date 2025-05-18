@@ -1,6 +1,6 @@
 import type { Skill } from "@/types/Skill";
 
-const basePath = import.meta.env.PROD ? '/last-survival-guide' : '';
+const basePath = '/last-survival-guide';
 
 export const activeSkills = [
   { id: 'abaddon_aphotic_shield_basic', name: 'Aphotic Shield', type: 'active basic', imageUrl: `${basePath}/images/skills/active/abaddon_aphotic_shield.png` },
@@ -24,11 +24,11 @@ export const activeSkills = [
   { id: 'medusa_mystic_snake_basic', name: 'Mystic Snake', type: 'active basic', imageUrl: `${basePath}/images/skills/active/medusa_mystic_snake.png` },
   { id: 'nevermore_shadowraze1_basic', name: 'Shadowraze1', type: 'active basic', imageUrl: `${basePath}/images/skills/active/nevermore_shadowraze1.png` },
   { id: 'nevermore_shadowraze2_basic', name: 'Shadowraze2', type: 'active basic', imageUrl: `${basePath}/images/skills/active/nevermore_shadowraze2.png` },
-  { id: 'night_stalker_void_basic', name: 'Stalker Void', type: 'active basic', imageUrl: `${basePath}/images/skills/active/night_stalker_void.png` },
-  { id: 'obsidian_destroyer_arcane_orb_custom_basic', name: 'Destroyer Arcane Orb Custom', type: 'active basic', imageUrl: `${basePath}/images/skills/active/obsidian_destroyer_arcane_orb_custom.png` },
+  { id: 'night_stalker_void_basic', name: 'Void', type: 'active basic', imageUrl: `${basePath}/images/skills/active/night_stalker_void.png` },
+  { id: 'obsidian_destroyer_arcane_orb_basic', name: 'Arcane Orb Custom', type: 'active basic', imageUrl: `${basePath}/images/skills/active/obsidian_destroyer_arcane_orb.png` },
   { id: 'pudge_meat_hook_basic', name: 'Meat Hook', type: 'active basic', imageUrl: `${basePath}/images/skills/active/pudge_meat_hook.png` },
   { id: 'pudge_rot_basic', name: 'Rot', type: 'active basic', imageUrl: `${basePath}/images/skills/active/pudge_rot.png` },
-  { id: 'ringmaster_wheel_custom_basic', name: 'Wheel Custom', type: 'active basic', imageUrl: `${basePath}/images/skills/active/ringmaster_wheel_custom.png` },
+  { id: 'ringmaster_wheel_basic', name: 'Wheel Custom', type: 'active basic', imageUrl: `${basePath}/images/skills/active/ringmaster_wheel.png` },
   { id: 'sniper_headshot_basic', name: 'Headshot', type: 'active basic', imageUrl: `${basePath}/images/skills/active/sniper_headshot.png` },
   { id: 'sniper_shrapnel_basic', name: 'Shrapnel', type: 'active basic', imageUrl: `${basePath}/images/skills/active/sniper_shrapnel.png` },
   { id: 'storm_spirit_static_remnant_basic', name: 'Spirit Static Remnant', type: 'active basic', imageUrl: `${basePath}/images/skills/active/storm_spirit_static_remnant.png` },
@@ -66,11 +66,11 @@ export const evoSkills = [
   { id: 'medusa_mana_shield_evo', name: 'Mana Shield', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/medusa_mana_shield.png` },
   { id: 'medusa_mystic_snake_evo', name: 'Mystic Snake', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/medusa_mystic_snake.png` },
   { id: 'nevermore_shadowraze_evo', name: 'Shadowraze1', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/nevermore_shadowraze.png` },
-  { id: 'night_stalker_void_evo', name: 'Stalker Void', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/night_stalker_void.png` },
-  { id: 'obsidian_destroyer_arcane_orb_custom_evo', name: 'Destroyer Arcane Orb Custom', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/obsidian_destroyer_arcane_orb_custom.png` },
+  { id: 'night_stalker_void_evo', name: 'Void', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/night_stalker_void.png` },
+  { id: 'obsidian_destroyer_arcane_orb_evo', name: 'Arcane Orb Custom', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/obsidian_destroyer_arcane_orb.png` },
   { id: 'pudge_meat_hook_evo', name: 'Meat Hook', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/pudge_meat_hook.png` },
   { id: 'pudge_rot_evo', name: 'Rot', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/pudge_rot.png` },
-  { id: 'ringmaster_wheel_custom_evo', name: 'Wheel Custom', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/ringmaster_wheel_custom.png` },
+  { id: 'ringmaster_wheel_evo', name: 'Wheel Custom', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/ringmaster_wheel.png` },
   { id: 'sniper_headshot_evo', name: 'Headshot', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/sniper_headshot.png` },
   { id: 'sniper_shrapnel_evo', name: 'Shrapnel', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/sniper_shrapnel.png` },
   { id: 'storm_spirit_static_remnant_evo', name: 'Spirit Static Remnant', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/storm_spirit_static_remnant.png` },
@@ -102,10 +102,10 @@ export const awakeSkills = [
   { id: 'mars_spear_awake', name: 'Spear', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/mars_spear.png` },
   { id: 'medusa_mystic_snake_awake', name: 'Mystic Snake', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/medusa_mystic_snake.png` },
   { id: 'nevermore_shadowraze_awake', name: 'Shadowraze1', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/nevermore_shadowraze.png` },
-  { id: 'night_stalker_void_awake', name: 'Stalker Void', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/night_stalker_void.png` },
-  { id: 'obsidian_destroyer_arcane_orb_custom_awake', name: 'Destroyer Arcane Orb Custom', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/obsidian_destroyer_arcane_orb_custom.png` },
+  { id: 'night_stalker_void_awake', name: 'Void', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/night_stalker_void.png` },
+  { id: 'obsidian_destroyer_arcane_orb_awake', name: 'Arcane Orb Custom', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/obsidian_destroyer_arcane_orb.png` },
   { id: 'pudge_rot_awake', name: 'Rot', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/pudge_rot.png` },
-  { id: 'ringmaster_wheel_custom_awake', name: 'Wheel Custom', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/ringmaster_wheel_custom.png` },
+  { id: 'ringmaster_wheel_awake', name: 'Wheel Custom', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/ringmaster_wheel.png` },
   { id: 'sniper_headshot_awake', name: 'Headshot', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/sniper_headshot.png` },
   { id: 'storm_spirit_static_remnant_awake', name: 'Spirit Static Remnant', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/storm_spirit_static_remnant.png` },
   { id: 'techies_land_mines_awake', name: 'Land Mines', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/techies_land_mines.png` },

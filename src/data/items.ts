@@ -1,6 +1,6 @@
 import type { Item } from "@/types/Item";
 
-const basePath = import.meta.env.PROD ? '/last-survival-guide' : '';
+const basePath = '/last-survival-guide';
 
 export const itemsTierS = [
   { id: "aegis", name: "Aegis", tier: "S", imageUrl: `${basePath}/images/items/S/aegis.png` },
