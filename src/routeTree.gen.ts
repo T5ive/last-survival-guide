@@ -11,20 +11,20 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as GameBuilderImport } from './routes/GameBuilder'
 import { Route as IndexImport } from './routes/index'
+import { Route as GameBuilderImport } from './routes/GameBuilder'
 
 // Create/Update Routes
-
-const GameBuilderRoute = GameBuilderImport.update({
-  id: '/GameBuilder',
-  path: '/GameBuilder',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GameBuilderRoute = GameBuilderImport.update({
+  id: '/GameBuilder',
+  path: '/GameBuilder',
   getParentRoute: () => rootRoute,
 } as any)
 
