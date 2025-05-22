@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/context/LanguageContext";
 import { useState } from "react";
 
 type FilterType = "all" | "active" | "active basic" | "active evo" | "active awake" | "passive";
@@ -9,6 +10,7 @@ interface SkillFilterProps {
 }
 
 const SkillFilter: React.FC<SkillFilterProps> = ({ onFilterChange }) => {
+	const { t } = useLanguage();
 	const [nameFilter, setNameFilter] = useState("");
 	const [typeFilter, setTypeFilter] = useState<FilterType>("all");
 
@@ -25,24 +27,24 @@ const SkillFilter: React.FC<SkillFilterProps> = ({ onFilterChange }) => {
 	};
 
 	return (
-		<div className="flex space-x-4 mb-4">
+		<div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 mb-4">
 			<Input
-				placeholder="Search skill name..."
+				placeholder={t("searchSkillName")}
 				value={nameFilter}
 				onChange={handleNameChange}
-				className="w-1/2 text-white"
+				className="w-full sm:w-1/2"
 			/>
 			<Select value={typeFilter} onValueChange={handleTypeChange}>
-				<SelectTrigger className="w-1/4 text-white">
-					<SelectValue placeholder="Skill Type" />
+				<SelectTrigger className="w-full sm:w-1/4">
+					<SelectValue placeholder={t("skillType")} />
 				</SelectTrigger>
 				<SelectContent>
-					<SelectItem value="all">All</SelectItem>
-					<SelectItem value="active">Active</SelectItem>
-					<SelectItem value="active basic">Active Basic</SelectItem>
-					<SelectItem value="active evo">Active Evo</SelectItem>
-					<SelectItem value="active awake">Active Awake</SelectItem>
-					<SelectItem value="passive">Passive</SelectItem>
+					<SelectItem value="all">{t("all")}</SelectItem>
+					<SelectItem value="active">{t("active")}</SelectItem>
+					<SelectItem value="active basic">{t("activeBasic")}</SelectItem>
+					<SelectItem value="active evo">{t("activeEvo")}</SelectItem>
+					<SelectItem value="active awake">{t("activeAwake")}</SelectItem>
+					<SelectItem value="passive">{t("passive")}</SelectItem>
 				</SelectContent>
 			</Select>
 		</div>

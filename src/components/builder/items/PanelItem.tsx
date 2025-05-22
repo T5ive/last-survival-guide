@@ -46,7 +46,7 @@ const PanelItem: React.FC<PanelItemProps> = ({ availableItems }) => {
 	const itemsTierB = filteredItems.filter((s) => s.tier === "B");
 
 	const renderItemGrid = (items: Item[]) => (
-		<div className="grid grid-cols-8 gap-4">
+		<div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
 			{items.map((item) => (
 				<ItemSlot key={item.id} item={item} showItemTier={true} isBuilder={false} />
 			))}
@@ -54,7 +54,7 @@ const PanelItem: React.FC<PanelItemProps> = ({ availableItems }) => {
 	);
 
 	return (
-		<div className="bg-gray-900 rounded-lg p-4">
+		<div className="bg-card text-card-foreground rounded-lg p-4">
 			<ItemFilter onFilterChange={handleFilterChange} />
 			{renderItemGrid(itemsTierS)}
 			<div className="mt-4" />

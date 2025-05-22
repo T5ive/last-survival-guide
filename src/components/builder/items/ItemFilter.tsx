@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/context/LanguageContext";
 import { useState } from "react";
 
 type FilterTier = "all" | "S" | "A" | "B";
@@ -9,6 +10,7 @@ interface ItemFilterProps {
 }
 
 const ItemFilter: React.FC<ItemFilterProps> = ({ onFilterChange }) => {
+	const { t } = useLanguage();
 	const [nameFilter, setNameFilter] = useState("");
 	const [tierFilter, setTierFilter] = useState<FilterTier>("all");
 
@@ -25,22 +27,22 @@ const ItemFilter: React.FC<ItemFilterProps> = ({ onFilterChange }) => {
 	};
 
 	return (
-		<div className="flex space-x-4 mb-4">
+		<div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 mb-4">
 			<Input
-				placeholder="Search item name..."
+				placeholder={t("searchItemName")}
 				value={nameFilter}
 				onChange={handleNameChange}
-				className="w-1/2 text-white"
+				className="w-full sm:w-1/2"
 			/>
 			<Select value={tierFilter} onValueChange={handleTierChange}>
-				<SelectTrigger className="w-1/4 text-white">
-					<SelectValue placeholder="Item Tier" />
+				<SelectTrigger className="w-full sm:w-1/4">
+					<SelectValue placeholder={t("itemTier")} />
 				</SelectTrigger>
 				<SelectContent>
-					<SelectItem value="all">All</SelectItem>
-					<SelectItem value="S">S</SelectItem>
-					<SelectItem value="A">A</SelectItem>
-					<SelectItem value="B">B</SelectItem>
+					<SelectItem value="all">{t("all")}</SelectItem>
+					<SelectItem value="S">{t("tierS")}</SelectItem>
+					<SelectItem value="A">{t("tierA")}</SelectItem>
+					<SelectItem value="B">{t("tierB")}</SelectItem>
 				</SelectContent>
 			</Select>
 		</div>

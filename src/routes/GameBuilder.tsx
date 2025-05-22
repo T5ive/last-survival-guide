@@ -2,24 +2,50 @@ import PanelBuilder from "@/components/builder/PanelBuilder";
 import PanelItem from "@/components/builder/items/PanelItem";
 import PanelSkill from "@/components/builder/skills/PanelSkill";
 import { Button } from "@/components/ui/button";
-import { DragProvider } from "@/context/DragContext";
+import { DragProvider, isItem, isSkill, useDragContext } from "@/context/DragContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { allItems } from "@/data/items";
 import { allSkills } from "@/data/skills";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { cn } from "@/lib/utils";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import { createFileRoute } from "@tanstack/react-router";
 import html2canvas from "html2canvas-pro";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/GameBuilder")({
 	component: GameBuilder,
 });
 
 function GameBuilder() {
+	const { t } = useLanguage();
 	const panelRef = useRef<HTMLDivElement>(null);
 	const [activeTab, setActiveTab] = useState<"skills" | "items">("skills");
 	const [usedSkills, setUsedSkills] = useState<(Skill | undefined)[]>(Array(12).fill(undefined));
 	const [usedItems, setUsedItems] = useState<(Item | undefined)[]>(Array(6).fill(undefined));
+
+	const { draggingObject } = useDragContext();
+	const [isSourceListHidden, setIsSourceListHidden] = useState(false);
+	const isSmallScreen = useMediaQuery("(max-width: 639px)"); // Tailwind's sm breakpoint starts at 640px
+
+	useEffect(() => {
+		if (draggingObject) {
+			if (isSmallScreen) {
+				if (activeTab === "skills" && isSkill(draggingObject)) {
+					setIsSourceListHidden(true);
+				} else if (activeTab === "items" && isItem(draggingObject)) {
+					setIsSourceListHidden(true);
+				} else {
+					setIsSourceListHidden(false); // Different type is being dragged, or different tab
+				}
+			} else {
+				setIsSourceListHidden(false); // Not a small screen, so source list should not be hidden by this logic
+			}
+		} else {
+			setIsSourceListHidden(false); // Drag ended
+		}
+	}, [draggingObject, activeTab, isSmallScreen]);
 
 	const handleSkillDropAt = (targetIndex: number, droppedSkill: Skill) => {
 		const fromIndex = usedSkills.findIndex((s) => s?.id === droppedSkill.id);
@@ -141,41 +167,47 @@ function GameBuilder() {
 
 	return (
 		<DragProvider>
-			<div className="min-h-screen bg-gray-900 p-8">
-				<h1 className="text-4xl font-bold text-white mb-8">Game Builder</h1>
+			<div className="min-h-screen bg-background text-foreground p-8">
+				<h1 className="text-4xl font-bold text-foreground mb-8">{t("gameBuilder")}</h1>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full h-full">
 					<div className="min-w-0">
 						{/* Tab Selector */}
-						<div className="flex mb-4 space-x-2">
+						<div className="flex flex-col sm:flex-row mb-4 space-y-2 sm:space-y-0 sm:space-x-2">
 							<Button
 								onClick={() => setActiveTab("skills")}
-								className={`px-4 py-2 rounded ${
-									activeTab === "skills" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300"
-								}`}
+								variant={activeTab === "skills" ? "default" : "secondary"}
+								className="px-4 py-2 rounded w-full sm:w-auto"
 							>
-								Skills
+								{t("skills")}
 							</Button>
 							<Button
 								onClick={() => setActiveTab("items")}
-								className={`px-4 py-2 rounded ${
-									activeTab === "items" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300"
-								}`}
+								variant={activeTab === "items" ? "default" : "secondary"}
+								className="px-4 py-2 rounded w-full sm:w-auto"
 							>
-								Items
+								{t("items")}
 							</Button>
 						</div>
 
 						{/* Tab Content */}
-						{activeTab === "skills" && <PanelSkill availableSkills={availableSkills} />}
-						{activeTab === "items" && <PanelItem availableItems={availableItems} />}
+						{activeTab === "skills" && (
+							<div className={cn({ hidden: isSourceListHidden })}>
+								<PanelSkill availableSkills={availableSkills} />
+							</div>
+						)}
+						{activeTab === "items" && (
+							<div className={cn({ hidden: isSourceListHidden })}>
+								<PanelItem availableItems={availableItems} />
+							</div>
+						)}
 					</div>
 					<div className="min-w-0">
-						<div className="flex gap-2 justify-end mb-2">
-							<Button onClick={handleDownload} className="px-4 py-2 bg-blue-600 text-white rounded">
-								Download
+						<div className="flex flex-col sm:flex-row gap-2 justify-end mb-2">
+							<Button onClick={handleDownload} variant="default" className="px-4 py-2 rounded w-full sm:w-auto">
+								{t("download")}
 							</Button>
-							<Button onClick={handleCopy} className="px-4 py-2 bg-green-600 text-white rounded">
-								Copy
+							<Button onClick={handleCopy} variant="secondary" className="px-4 py-2 rounded w-full sm:w-auto">
+								{t("copy")}
 							</Button>
 						</div>
 						<div ref={panelRef}>

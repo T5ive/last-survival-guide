@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
 import { isItem, useDragContext } from "@/context/DragContext";
 import type { Item } from "@/types/Item";
 import type { DragEvent } from "react";
@@ -19,6 +20,7 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 	showItemName = false,
 	isBuilder,
 }) => {
+	const { t } = useLanguage();
 	const { setDraggingObject, draggingObject } = useDragContext();
 
 	const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -47,24 +49,26 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 
 	const getBorderColor = () => {
 		if (item?.tier === "S") {
-			return "border-amber-400";
+			return "border-primary"; // Use theme's primary color for S tier
 		}
 		if (item?.tier === "A") {
-			return "border-purple-700";
+			return "border-accent"; // Use theme's accent color for A tier
 		}
 		if (item?.tier === "B") {
-			return "border-green-400";
+			return "border-secondary"; // Use theme's secondary for B tier
 		}
+		return "border-border"; // Default fallback
 	};
 
 	return (
 		<div
-			className={`bg-gray-700 rounded-lg flex items-center justify-center relative ${
-				isBuilder ? "border-dashed border-2 " : ""
+			className={`bg-muted rounded-lg flex items-center justify-center relative ${
+				isBuilder
+					? "border-dashed border-2 border-border w-full aspect-[4/3] max-w-[129px]" // Flexible for builder with max width
+					: "w-22 h-16" // Default size for non-builder (e.g. in item list)
 			}
-			${item ? `border-solid border-2 ${getBorderColor()}` : "border-gray-500"}
+			${item ? `border-solid border-2 ${getBorderColor()}` : "border-border"}
 			`}
-			style={{ width: `${isBuilder ? 88 * 2 : 88}px`, height: `${isBuilder ? 64 * 2 : 64}px` }}
 			onDragOver={handleDragOver}
 			onDrop={handleDrop}
 			draggable={true}
@@ -75,36 +79,35 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 					<img
 						src={item.imageUrl}
 						alt={item.name}
-						className="rounded-lg"
-						width={isBuilder ? 88 * 2 : 88}
-						height={isBuilder ? 64 * 2 : 64}
+						className="rounded-lg object-cover w-full h-full"
 						draggable={true}
 					/>
 					{isBuilder && item && (
 						<Button
 							type="button"
 							onClick={onRemove}
-							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 bg-red-600 hover:bg-red-700 text-white rounded-full text-sm shadow-md transition duration-150"
-							title="Remove item"
-							size={null}
+							variant="destructive" // Use destructive variant for styling
+							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 rounded-full text-sm shadow-md transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out"
+							title={t("removeItem")}
+							size="icon" // Use icon size for small button
 						>
 							&times;
 						</Button>
 					)}
 
 					{showItemTier && (
-						<div className="absolute top-1 right-1 bg-black text-white px-1 py-0.5 rounded-full text-xs">
+						<div className="absolute top-1 right-1 bg-muted text-muted-foreground px-1 py-0.5 rounded-full text-xs">
 							{item.tier}
 						</div>
 					)}
 					{showItemName && (
-						<div className="absolute bottom-1 text-center bg-black text-white px-1.5 py-0.5 rounded-full text-xs">
+						<div className="absolute bottom-1 text-center bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full text-xs">
 							{item.name}
 						</div>
 					)}
 				</>
 			) : (
-				<div className="text-gray-500 text-sm">Empty</div>
+				<div className="text-muted-foreground text-sm">{t("emptySlot")}</div>
 			)}
 		</div>
 	);
