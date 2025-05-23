@@ -49,25 +49,23 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 
 	const getBorderColor = () => {
 		if (item?.tier === "S") {
-			return "border-primary"; // Use theme's primary color for S tier
+			return "border-amber-400";
 		}
 		if (item?.tier === "A") {
-			return "border-accent"; // Use theme's accent color for A tier
+			return "border-purple-700";
 		}
 		if (item?.tier === "B") {
-			return "border-secondary"; // Use theme's secondary for B tier
+			return "border-green-400";
 		}
-		return "border-border"; // Default fallback
+		return "";
 	};
 
 	return (
 		<div
-			className={`bg-muted rounded-lg flex items-center justify-center relative ${
-				isBuilder
-					? "border-dashed border-2 border-border w-full aspect-[4/3] max-w-[129px]" // Flexible for builder with max width
-					: "w-22 h-16" // Default size for non-builder (e.g. in item list)
+			className={`bg-muted rounded-lg flex items-center justify-center relative w-full aspect-[4/3] ${
+				isBuilder ? "border-dashed border-2 max-w-[128px]" : "max-w-[88px]"
 			}
-			${item ? `border-solid border-2 ${getBorderColor()}` : "border-border"}
+			${item ? `border-solid border-3 ${getBorderColor()}` : "border-gray-500"}
 			`}
 			onDragOver={handleDragOver}
 			onDrop={handleDrop}
@@ -76,12 +74,7 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 		>
 			{item ? (
 				<>
-					<img
-						src={item.imageUrl}
-						alt={item.name}
-						className="rounded-lg object-cover w-full h-full"
-						draggable={true}
-					/>
+					<img src={item.imageUrl} alt={item.name} className="rounded-sm w-full h-full object-cover" draggable={true} />
 					{isBuilder && item && (
 						<Button
 							type="button"
