@@ -61,13 +61,13 @@ code {
 	--card-foreground: oklch(0.1 0.005 240);
 	--popover: oklch(0.97 0.005 240);
 	--popover-foreground: oklch(0.1 0.005 240);
-	--primary: oklch(0.45 0.07 230); /* Muted blue */
+	--primary: oklch(0.45 0.17 230); /* Muted blue */
 	--primary-foreground: oklch(0.99 0.005 240); /* Off-white for contrast */
 	--secondary: oklch(0.92 0.005 240); /* Lighter gray */
 	--secondary-foreground: oklch(0.2 0.005 240); /* Darker gray for contrast */
 	--muted: oklch(0.95 0.005 240); /* Very light gray */
 	--muted-foreground: oklch(0.45 0.005 240); /* Medium gray */
-	--accent: oklch(0.5 0.05 200); /* Muted teal */
+	--accent: oklch(0.5 0.75 200); /* Muted teal */
 	--accent-foreground: oklch(0.99 0.005 240); /* Off-white for contrast */
 	--destructive: oklch(0.55 0.18 25); /* Muted red */
 	--border: oklch(0.9 0.005 240); /* Light gray */
@@ -95,13 +95,13 @@ code {
 	--card-foreground: oklch(0.95 0.005 240);
 	--popover: oklch(0.18 0.005 240);
 	--popover-foreground: oklch(0.95 0.005 240);
-	--primary: oklch(0.65 0.07 230); /* Muted light blue */
-	--primary-foreground: oklch(0.12 0.005 240); /* Dark gray for contrast */
+	--primary: oklch(0.55 0.17 230); /* Muted light blue */
+	--primary-foreground: oklch(0.95 0.005 240); /* Dark gray for contrast */
 	--secondary: oklch(0.22 0.005 240); /* Darker gray */
 	--secondary-foreground: oklch(0.9 0.005 240); /* Light gray */
 	--muted: oklch(0.22 0.005 240);
 	--muted-foreground: oklch(0.65 0.005 240); /* Medium-light gray */
-	--accent: oklch(0.6 0.05 200); /* Muted light teal */
+	--accent: oklch(0.5 0.65 200); /* Muted light teal */
 	--accent-foreground: oklch(0.12 0.005 240); /* Dark gray for contrast */
 	--destructive: oklch(0.6 0.18 25); /* Muted red for dark mode */
 	--border: oklch(0.25 0.005 240); /* Dark gray, slightly lighter than background */
