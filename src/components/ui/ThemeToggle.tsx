@@ -14,6 +14,7 @@ const SunIcon = () => (
 		strokeLinejoin="round"
 		className="lucide lucide-sun"
 	>
+		<title>Light</title>
 		<circle cx="12" cy="12" r="4" />
 		<path d="M12 2v2" />
 		<path d="M12 20v2" />
@@ -39,6 +40,7 @@ const MoonIcon = () => (
 		strokeLinejoin="round"
 		className="lucide lucide-moon"
 	>
+		<title>Dark</title>
 		<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
 	</svg>
 );
@@ -49,8 +51,8 @@ export default function ThemeToggle() {
 	useEffect(() => {
 		const storedTheme = localStorage.getItem("theme");
 		const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-		const initialTheme = (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) ? "dark" : "light";
-		
+		const initialTheme = storedTheme === "dark" || (!storedTheme && systemPrefersDark) ? "dark" : "light";
+
 		setTheme(initialTheme);
 		if (initialTheme === "dark") {
 			document.documentElement.classList.add("dark");

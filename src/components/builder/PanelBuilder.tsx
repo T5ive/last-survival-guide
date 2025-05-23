@@ -44,10 +44,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 					/>
 				))}
 
-				<Button
-					onClick={onClearSkill}
-					className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-6 mt-4 mb-4"
-				>
+				<Button onClick={onClearSkill} className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-6 mt-4 mb-4">
 					{t("clearSkills")}
 				</Button>
 			</div>
@@ -66,10 +63,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 					);
 				})}
 
-				<Button
-					onClick={onClearItem}
-					className="col-span-1 sm:col-span-2 md:col-span-3 mt-4"
-				>
+				<Button onClick={onClearItem} className="col-span-1 sm:col-span-2 md:col-span-3 mt-4">
 					{t("clearItems")}
 				</Button>
 			</div>
