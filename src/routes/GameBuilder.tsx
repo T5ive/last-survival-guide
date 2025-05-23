@@ -29,6 +29,7 @@ function GameBuilder() {
 	const [isSourceListHidden, setIsSourceListHidden] = useState(false);
 	const isSmallScreen = useMediaQuery("(max-width: 639px)"); // Tailwind's sm breakpoint starts at 640px
 
+	//TODO
 	useEffect(() => {
 		if (draggingObject) {
 			if (isSmallScreen) {
@@ -202,7 +203,7 @@ function GameBuilder() {
 						)}
 					</div>
 					<div className="min-w-0">
-						<div className="flex flex-col sm:flex-row gap-2 justify-end mb-2">
+						<div className="flex flex-col sm:flex-row gap-2 justify-end mb-4">
 							<Button onClick={handleDownload} variant="default" className="px-4 py-2 rounded w-full sm:w-auto">
 								{t("download")}
 							</Button>
