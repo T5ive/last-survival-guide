@@ -61,7 +61,7 @@ export default function Header() {
 			</nav>
 			<div className="flex items-center gap-1 sm:gap-2">
 				<a
-					href="https://github.com/your-username/your-repo-name" // Placeholder URL
+					href="https://github.com/T5ive/last-survival-guide" // Placeholder URL
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label={t("viewSource")}
