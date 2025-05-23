@@ -64,7 +64,7 @@ export default function Header() {
 			<div className="flex items-center gap-1 sm:gap-2">
 				<Button variant="ghost" size="sm" aria-label={t("selectLanguage")} onClick={toggleLanguage}>
 					<GlobeIcon />
-					<span className="ml-1.5">{language === "EN" ? t("thSwitch") : t("enSwitch")}</span>
+					<span className="ml-1.5">{language === "EN" ? t("enSwitch") : t("thSwitch")}</span>
 				</Button>
 				<ThemeToggle />
 
