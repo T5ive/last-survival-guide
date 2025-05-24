@@ -7,6 +7,7 @@ import PanelSkill from "@/components/builder/skills/PanelSkill";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Added
 import { Textarea } from "@/components/ui/textarea"; // Added
+import { toast } from "sonner";
 import { DragProvider, isSkill, useDragContext } from "@/context/DragContext";
 import { useLanguage } from "@/context/LanguageContext";
 import useBreakpoints from "@/hooks/useBreakpoints";
@@ -245,13 +246,13 @@ function GameBuilder() {
 		canvas.toBlob(async (blob) => {
 			if (!blob) return;
 			await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-			alert(t("imageCopied"));
+			toast.success(t("imageCopied"));
 		});
 	};
 
 	const handleSaveBuild = () => {
 		if (!buildName.trim()) {
-			alert(t("buildNameRequired"));
+			toast.warning(t("buildNameRequired"));
 			return;
 		}
 		const newBuild: Build = {
@@ -268,10 +269,10 @@ function GameBuilder() {
 			localStorage.setItem("savedGameBuilds", JSON.stringify(updatedBuilds));
 			setBuildName("");
 			setSaveModalOpen(false);
-			alert(t("buildSaved"));
+			toast.success(t("buildSaved"));
 		} catch (error) {
 			console.error("Failed to save build:", error);
-			alert(t("errorSavingBuild"));
+			toast.error(t("errorSavingBuild"));
 		}
 	};
 
@@ -290,7 +291,7 @@ function GameBuilder() {
 				localStorage.setItem("savedGameBuilds", JSON.stringify(updatedBuilds));
 			} catch (error) {
 				console.error("Failed to delete build:", error);
-				alert(t("errorDeletingBuild"));
+				toast.error(t("errorDeletingBuild"));
 			}
 		}
 	};
@@ -304,17 +305,17 @@ function GameBuilder() {
 		};
 		const jsonString = JSON.stringify(currentBuildObject);
 		navigator.clipboard.writeText(jsonString).then(
-			() => alert(t("buildCopied")),
+			() => toast.success(t("buildCopied")),
 			(err) => {
 				console.error("Failed to copy build JSON:", err);
-				alert(t("errorCopyingJson"));
+				toast.error(t("errorCopyingJson"));
 			},
 		);
 	};
 
 	const handleImportBuild = () => {
 		if (!jsonInput.trim()) {
-			alert(t("pasteJsonHere")); // Or a more specific error if it's empty
+			toast.warning(t("pasteJsonHere")); // Or a more specific error if it's empty
 			return;
 		}
 		try {
@@ -331,13 +332,13 @@ function GameBuilder() {
 				applyImportedBuild(buildToImport as Omit<Build, "name" | "timestamp">); // Type assertion
 				setJsonInput("");
 				setImportModalOpen(false);
-				alert(t("buildImported"));
+				toast.success(t("buildImported"));
 			} else {
-				alert(t("invalidJsonFormat"));
+				toast.error(t("invalidJsonFormat"));
 			}
 		} catch (error) {
 			console.error("Failed to import build:", error);
-			alert(t("invalidJsonFormat"));
+			toast.error(t("invalidJsonFormat"));
 		}
 	};
 
