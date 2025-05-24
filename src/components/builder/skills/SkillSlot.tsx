@@ -92,7 +92,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 							type="button"
 							onClick={onRemove}
 							variant="destructive" // Use destructive variant
-							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 rounded-full text-sm shadow-md transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out"
+							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 rounded-full text-sm shadow-md transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out cursor-pointer"
 							title={t("removeSkill")}
 							size="icon" // Use icon size
 						>
@@ -114,16 +114,24 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 					{/* Enhancement Stars */}
 					{isArray && (
 						<span
-							className="absolute bottom-1 left-1 text-red-500 text-lg"
-							title={t("arrayTab")} // Or a more specific title if needed
+							className="absolute bottom-1 left-1 
+							w-full max-w-4 md:max-w-2 lg:max-w-4 xl:max-w-5 h-full max-h-4 md:max-h-2 lg:max-h-4 xl:max-h-5 aspect-square
+							flex items-center justify-center
+							rounded-full bg-red-500 text-white text-sm md:text-xs lg:text-sm shadow-md 
+							transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out cursor-pointer"
+							title={t("arrayTab")}
 						>
 							★
 						</span>
 					)}
 					{isGrimoire && (
 						<span
-							className="absolute bottom-1 right-1 text-purple-500 text-lg"
-							title={t("grimoireTab")} // Or a more specific title if needed
+							className="absolute bottom-1 right-1 
+							w-full max-w-4 md:max-w-2 lg:max-w-4 xl:max-w-5 h-full max-h-4 md:max-h-2 lg:max-h-4 xl:max-h-5 aspect-square
+							flex items-center justify-center
+							rounded-full bg-purple-500 text-white text-sm md:text-xs lg:text-sm shadow-md 
+							transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out cursor-pointer"
+							title={t("grimoireTab")}
 						>
 							★
 						</span>
