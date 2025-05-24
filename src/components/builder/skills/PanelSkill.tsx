@@ -47,7 +47,7 @@ const PanelSkill: React.FC<PanelSkillProps> = ({ availableSkills }) => {
 	const passiveSkills = filteredSkills.filter((s) => s.type === "passive");
 
 	const renderSkillGrid = (skills: Skill[]) => (
-		<div className="grid grid-cols-8 gap-4">
+		<div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
 			{skills.map((skill) => (
 				<SkillSlot key={skill.id} skill={skill} size={68} showSkillType={true} isBuilder={false} />
 			))}
@@ -55,7 +55,7 @@ const PanelSkill: React.FC<PanelSkillProps> = ({ availableSkills }) => {
 	);
 
 	return (
-		<div className="bg-gray-900 rounded-lg p-4">
+		<div className="bg-card text-card-foreground rounded-lg p-4">
 			<SkillFilter onFilterChange={handleFilterChange} />
 			{renderSkillGrid(activeSkills)}
 			<div className="mt-4" />

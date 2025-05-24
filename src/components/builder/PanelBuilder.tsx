@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import ItemSlot from "./items/ItemSlot";
@@ -27,9 +28,10 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 	onRemoveItemAt,
 	onClearItem,
 }) => {
+	const { t } = useLanguage();
 	return (
 		<div>
-			<div className="grid grid-cols-6 gap-4 p-4 bg-gray-900 rounded-lg">
+			<div className="grid grid-cols-6 gap-4 p-4 bg-card text-card-foreground rounded-lg">
 				{skills.map((skill, index) => (
 					<SkillSlot
 						key={index}
@@ -37,16 +39,17 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 						onDrop={(droppedSkill) => onSkillDropAt(index, droppedSkill)}
 						onRemove={() => onRemoveSkillAt(index)}
 						allowedSkillType={index < 6 ? "active" : "passive"}
-						showSkillName={true}
+						showSkillName={false}
 						isBuilder={true}
 					/>
 				))}
 
-				<Button onClick={onClearSkill} className="col-span-6 mt-4 mb-4">
-					Clear Skills
+				<Button onClick={onClearSkill} className="col-span-6">
+					{t("clearSkills")}
 				</Button>
 			</div>
-			<div className="grid grid-cols-3 gap-2 p-4 bg-gray-900 rounded-lg">
+			{/* <div className="grid grid-cols-3 gap-y-4 justify-items-center p-4 bg-card rounded-lg"> */}
+			<div className="grid grid-cols-3 gap-y-4 p-4 bg-card text-card-foreground rounded-lg mt-4">
 				{items.map((item, index) => {
 					// ระบุการจัดวางแต่ละคอลัมน์
 					let justifyClass = "";
@@ -57,7 +60,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 					else if (index % 3 === 2) justifyClass = "justify-self-start"; // คอลขวา
 
 					return (
-						<div key={index} className={justifyClass}>
+						<div key={index} className={`${justifyClass} w-full max-w-[129px] aspect-[4/3]`}>
 							<ItemSlot
 								item={item}
 								onDrop={(droppedItem) => onItemDropAt(index, droppedItem)}
@@ -69,8 +72,8 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 					);
 				})}
 
-				<Button onClick={onClearItem} className="col-span-3 mt-4">
-					Clear Items
+				<Button onClick={onClearItem} className="col-span-3">
+					{t("clearItems")}
 				</Button>
 			</div>
 		</div>
