@@ -13,8 +13,8 @@ interface SkillSlotProps {
 	showSkillType?: boolean;
 	showSkillName?: boolean;
 	isBuilder: boolean;
-	isArray?: boolean; // Added
-	isGrimoire?: boolean; // Added
+	isArray?: boolean;
+	isGrimoire?: boolean;
 }
 
 const SkillSlot: React.FC<SkillSlotProps> = ({
@@ -26,8 +26,8 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 	showSkillType = false,
 	showSkillName = false,
 	isBuilder,
-	isArray, // Added
-	isGrimoire, // Added
+	isArray,
+	isGrimoire,
 }) => {
 	const { t } = useLanguage();
 	const { setDraggingObject, draggingObject } = useDragContext();
@@ -71,7 +71,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 				isBuilder
 					? "border-dashed border-2 border-gray-500"
 					: size === 128
-						? "w-32 h-32" 
+						? "w-32 h-32"
 						: `w-[${size}px] h-[${size}px]`
 			}`}
 			onDragOver={handleDragOver}

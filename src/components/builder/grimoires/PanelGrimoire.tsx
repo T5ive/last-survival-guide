@@ -27,9 +27,7 @@ const PanelGrimoire: React.FC<PanelGrimoireProps> = ({ skillsInPanel, enhancemen
 								<div className="flex flex-col items-center text-center">
 									<img src={skill.imageUrl} alt={skill.name} className="w-16 h-16 rounded-md object-contain mb-2" />
 									<span className="text-sm font-medium">{skill.name}</span>
-									<span className="text-xs text-muted-foreground">
-										({index < 6 ? t("active") : t("passive")})
-									</span>
+									<span className="text-xs text-muted-foreground">({index < 6 ? t("active") : t("passive")})</span>
 								</div>
 								<Button
 									onClick={() => onToggleGrimoire(index)}

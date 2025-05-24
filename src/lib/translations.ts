@@ -5,7 +5,7 @@ export const translations = {
     gameBuilder: "Game Builder",
     selectLanguage: "Select language",
     viewSource: "View source on GitHub",
-    
+
     // Language Switcher
     enSwitch: "EN", // Text for the button when current lang is TH, to switch to EN
     thSwitch: "TH", // Text for the button when current lang is EN, to switch to TH
@@ -15,7 +15,7 @@ export const translations = {
     items: "Items",
     download: "Download",
     copy: "Copy",
-    
+
     // PanelBuilder (optional for now, but good to have)
     clearSkills: "Clear Skills",
     clearItems: "Clear Items",

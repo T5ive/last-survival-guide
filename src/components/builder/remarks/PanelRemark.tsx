@@ -19,11 +19,7 @@ const PanelRemark: React.FC<PanelRemarkProps> = ({ skillsInPanel, remarks, onUpd
 					<div key={`panel-remark-skill-${index}`} className="flex flex-col space-y-2">
 						<div className="flex items-center space-x-2">
 							{skill ? (
-								<img
-									src={skill.imageUrl}
-									alt={skill.name}
-									className="w-10 h-10 rounded-md object-contain"
-								/>
+								<img src={skill.imageUrl} alt={skill.name} className="w-10 h-10 rounded-md object-contain" />
 							) : (
 								<div className="w-10 h-10 bg-muted rounded-md flex items-center justify-center text-muted-foreground text-xs">
 									{index + 1}
@@ -33,9 +29,7 @@ const PanelRemark: React.FC<PanelRemarkProps> = ({ skillsInPanel, remarks, onUpd
 								<span className={`text-sm font-medium ${!skill ? "text-muted-foreground" : ""}`}>
 									{skill ? skill.name : t("emptySlot")}
 								</span>
-								<span className="text-xs text-muted-foreground block">
-									({index < 6 ? t("active") : t("passive")})
-								</span>
+								<span className="text-xs text-muted-foreground block">({index < 6 ? t("active") : t("passive")})</span>
 							</div>
 						</div>
 						<Input

@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import ItemSlot from "./items/ItemSlot";
-import RemarksDisplay from "./remarks/RemarksDisplay"; // Added
+import RemarksDisplay from "./remarks/RemarksDisplay";
 import SkillSlot from "./skills/SkillSlot";
 
 interface PanelBuilderProps {
@@ -12,7 +12,7 @@ interface PanelBuilderProps {
 	onRemoveSkillAt: (index: number) => void;
 	onClearSkill: () => void;
 	skillEnhancements: Array<{ isArray: boolean; isGrimoire: boolean }>;
-	skillRemarks: string[]; // Added
+	skillRemarks: string[];
 
 	items: (Item | undefined)[];
 	onItemDropAt: (index: number, item: Item) => void;
@@ -26,7 +26,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 	onRemoveSkillAt,
 	onClearSkill,
 	skillEnhancements,
-	skillRemarks, // Added
+	skillRemarks,
 
 	items,
 	onItemDropAt,
@@ -58,7 +58,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 					{t("clearSkills")}
 				</Button>
 			</div>
-			{/* <div className="grid grid-cols-3 gap-y-4 justify-items-center p-4 bg-card rounded-lg"> */}
+			
 			<div className="grid grid-cols-3 gap-y-4 p-4 bg-card text-card-foreground rounded-lg mt-4">
 				{items.map((item, index) => {
 					// ระบุการจัดวางแต่ละคอลัมน์
