@@ -6,7 +6,7 @@ import { DragProvider, isItem, isSkill, useDragContext } from "@/context/DragCon
 import { useLanguage } from "@/context/LanguageContext";
 import { allItems } from "@/data/items";
 import { allSkills } from "@/data/skills";
-import useMediaQuery from "@/hooks/useMediaQuery";
+import useBreakpoints from "@/hooks/useBreakpoints";
 import { cn } from "@/lib/utils";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
@@ -27,12 +27,12 @@ function GameBuilder() {
 
 	const { draggingObject } = useDragContext();
 	const [isSourceListHidden, setIsSourceListHidden] = useState(false);
-	const isSmallScreen = useMediaQuery("(max-width: 639px)"); // Tailwind's sm breakpoint starts at 640px
+	const { isUnderSm, isSm, isMd, isLg, isXl, is2xl } = useBreakpoints();
 
 	//TODO
 	useEffect(() => {
 		if (draggingObject) {
-			if (isSmallScreen) {
+			if (isSm) {
 				if (activeTab === "skills" && isSkill(draggingObject)) {
 					setIsSourceListHidden(true);
 				} else if (activeTab === "items" && isItem(draggingObject)) {
@@ -46,7 +46,7 @@ function GameBuilder() {
 		} else {
 			setIsSourceListHidden(false); // Drag ended
 		}
-	}, [draggingObject, activeTab, isSmallScreen]);
+	}, [draggingObject, activeTab, isSm]);
 
 	const handleSkillDropAt = (targetIndex: number, droppedSkill: Skill) => {
 		const fromIndex = usedSkills.findIndex((s) => s?.id === droppedSkill.id);
