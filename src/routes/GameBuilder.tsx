@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Added
 import { Textarea } from "@/components/ui/textarea"; // Added
 import { toast } from "sonner";
-import { DragProvider, isSkill, useDragContext } from "@/context/DragContext";
+import { DragProvider } from "@/context/DragContext";
 import { useLanguage } from "@/context/LanguageContext";
-import useBreakpoints from "@/hooks/useBreakpoints";
 import { allItems } from "@/data/items";
 import { allSkills } from "@/data/skills";
 import type { Item } from "@/types/Item";
@@ -35,8 +34,6 @@ interface Build {
 
 function GameBuilder() {
 	const { t } = useLanguage();
-	const { isUnderSm } = useBreakpoints();
-	const { draggingObject } = useDragContext();
 	const panelRef = useRef<HTMLDivElement>(null);
 	const [activeTab, setActiveTab] = useState<"skills" | "items" | "array" | "grimoire" | "remark">("skills");
 	const [usedSkills, setUsedSkills] = useState<(Skill | undefined)[]>(Array(12).fill(undefined));
@@ -464,66 +461,6 @@ function GameBuilder() {
 							</Button>
 						</div>
 
-						{isUnderSm && (
-							<div className="mini-panel-builder mb-4 p-2 border border-dashed border-border rounded-lg bg-card">
-								<h3 className="text-sm font-semibold mb-2 text-center">{t("miniPanelDragHelper")}</h3>
-								<div className="grid grid-cols-6 gap-1">
-									{usedSkills.map((skill, index) => {
-										const isActiveSlot = index < 6;
-										const isPassiveSlot = index >= 6;
-										return (
-											<div
-												key={`mini-slot-${index}`}
-												className={`aspect-square bg-muted rounded flex items-center justify-center border ${
-													draggingObject &&
-													isSkill(draggingObject) &&
-													(
-														(isActiveSlot && (draggingObject as Skill).type.includes("active")) ||
-															(isPassiveSlot && (draggingObject as Skill).type.includes("passive"))
-													)
-														? "border-primary scale-105"
-														: "border-border"
-												} transition-all duration-150`}
-												onDragOver={(e) => {
-													e.preventDefault();
-													if (draggingObject && isSkill(draggingObject)) {
-														const dragSkill = draggingObject as Skill;
-														if (
-															(isActiveSlot && dragSkill.type.includes("active")) ||
-															(isPassiveSlot && dragSkill.type.includes("passive"))
-														) {
-															e.dataTransfer.dropEffect = "move";
-														} else {
-															e.dataTransfer.dropEffect = "none";
-														}
-													} else {
-														e.dataTransfer.dropEffect = "none";
-													}
-												}}
-												onDrop={(e) => {
-													e.preventDefault();
-													if (draggingObject && isSkill(draggingObject)) {
-														const droppedSkill = draggingObject as Skill;
-														if (
-															(isActiveSlot && droppedSkill.type.includes("active")) ||
-															(isPassiveSlot && droppedSkill.type.includes("passive"))
-														) {
-															handleSkillDropAt(index, droppedSkill);
-														}
-													}
-												}}
-											>
-												{skill ? (
-													<img src={skill.imageUrl} alt={skill.name} className="w-full h-full object-contain rounded" />
-												) : (
-													<span className="text-xs text-muted-foreground">{index + 1}</span>
-												)}
-											</div>
-										);
-									})}
-								</div>
-							</div>
-						)}
 						<div ref={panelRef}>
 							<PanelBuilder
 								skills={usedSkills}
