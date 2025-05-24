@@ -30,7 +30,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 	};
 
 	const t = (key: TranslationKey): string => {
-		return translations[language][key] || translations.EN[key] || key; // Fallback chain: current lang -> EN -> key itself
+		return (
+			(translations[language] as Record<TranslationKey, string>)[key] ||
+			(translations.EN as Record<TranslationKey, string>)[key] ||
+			key
+		); // Fallback chain: current lang -> EN -> key itself
 	};
 
 	return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>;

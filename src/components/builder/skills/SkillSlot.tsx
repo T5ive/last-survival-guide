@@ -13,6 +13,8 @@ interface SkillSlotProps {
 	showSkillType?: boolean;
 	showSkillName?: boolean;
 	isBuilder: boolean;
+	isArray?: boolean;
+	isGrimoire?: boolean;
 }
 
 const SkillSlot: React.FC<SkillSlotProps> = ({
@@ -24,6 +26,8 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 	showSkillType = false,
 	showSkillName = false,
 	isBuilder,
+	isArray,
+	isGrimoire,
 }) => {
 	const { t } = useLanguage();
 	const { setDraggingObject, draggingObject } = useDragContext();
@@ -31,7 +35,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 	const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 
-		if (!isSkill(draggingObject)) {
+		if (!isSkill(draggingObject) || !isBuilder) {
 			e.dataTransfer.dropEffect = "none";
 			return;
 		}
@@ -67,7 +71,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 				isBuilder
 					? "border-dashed border-2 border-gray-500"
 					: size === 128
-						? "w-32 h-32" 
+						? "w-32 h-32"
 						: `w-[${size}px] h-[${size}px]`
 			}`}
 			onDragOver={handleDragOver}
@@ -106,6 +110,31 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 						<div className="absolute bottom-1 text-center bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full text-xs">
 							{skill.name}
 						</div>
+					)}
+					{/* Enhancement Stars */}
+					{isArray && (
+						<span
+							className="absolute bottom-1 left-1 
+							w-full max-w-4 md:max-w-2 lg:max-w-4 xl:max-w-5 h-full max-h-4 md:max-h-2 lg:max-h-4 xl:max-h-5 aspect-square
+							flex items-center justify-center
+							rounded-full bg-red-500 text-white text-sm md:text-xs lg:text-sm shadow-md 
+							transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out"
+							title={t("arrayTab")}
+						>
+							★
+						</span>
+					)}
+					{isGrimoire && (
+						<span
+							className="absolute bottom-1 right-1 
+							w-full max-w-4 md:max-w-2 lg:max-w-4 xl:max-w-5 h-full max-h-4 md:max-h-2 lg:max-h-4 xl:max-h-5 aspect-square
+							flex items-center justify-center
+							rounded-full bg-purple-500 text-white text-sm md:text-xs lg:text-sm shadow-md 
+							transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out"
+							title={t("grimoireTab")}
+						>
+							★
+						</span>
 					)}
 				</>
 			) : (
