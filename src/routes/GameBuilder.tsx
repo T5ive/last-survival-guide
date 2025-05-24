@@ -124,6 +124,18 @@ function GameBuilder() {
 			updatedSlots[index] = undefined;
 			return updatedSlots;
 		});
+
+		setSkillEnhancements((prev) => {
+			const newEnhancements = [...prev];
+			newEnhancements[index] = { ...newEnhancements[index], isArray: false, isGrimoire: false };
+			return newEnhancements;
+		});
+
+		setSkillRemarks((prev) => {
+			const newRemarks = [...prev];
+			newRemarks[index] = "";
+			return newRemarks;
+		});
 	};
 
 	const handleClearSkill = () => {
@@ -399,10 +411,10 @@ function GameBuilder() {
 						{/* Action Buttons Group */}
 						<div className="flex flex-wrap gap-2 justify-end mb-4">
 							<Button onClick={handleDownload} variant="default" className="px-4 py-2 rounded">
-								{t("download")}
+								{t("downloadImage")}
 							</Button>
-							<Button onClick={handleCopy} variant="secondary" className="px-4 py-2 rounded">
-								{t("copy")}
+							<Button onClick={handleCopy} variant="outline" className="px-4 py-2 rounded">
+								{t("copyImage")}
 							</Button>
 							<Button onClick={() => setSaveModalOpen(true)} variant="outline" className="px-4 py-2 rounded">
 								{t("saveBuild")}
