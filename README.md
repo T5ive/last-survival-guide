@@ -30,5 +30,8 @@ pnpm build
 - [ ] Tricks
 
 ## General
-- [ ] Localization
-- [ ] UX/UI
+- [x] Localization
+- [x] UX/UI
+- [ ] Add Change logs page
+- [ ] Add Builder by Community
+- [ ] Add Guide Page by Community
