@@ -80,7 +80,7 @@ const ItemSlot: React.FC<ItemSlotProps> = ({
 							type="button"
 							onClick={onRemove}
 							variant="destructive" // Use destructive variant for styling
-							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 rounded-full text-sm shadow-md transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out cursor-pointer"
+							className="absolute top-1 right-1 z-10 flex items-center justify-center w-5 h-5 rounded-full text-sm shadow-md transition duration-150 transform hover:scale-110 active:scale-95 ease-in-out"
 							title={t("removeItem")}
 							size="icon" // Use icon size for small button
 						>
