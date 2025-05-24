@@ -3,6 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import ItemSlot from "./items/ItemSlot";
+import RemarksDisplay from "./remark/RemarksDisplay"; // Added
 import SkillSlot from "./skills/SkillSlot";
 
 interface PanelBuilderProps {
@@ -10,6 +11,8 @@ interface PanelBuilderProps {
 	onSkillDropAt: (index: number, skill: Skill) => void;
 	onRemoveSkillAt: (index: number) => void;
 	onClearSkill: () => void;
+	skillEnhancements: Array<{ isArray: boolean; isGrimoire: boolean }>;
+	skillRemarks: string[]; // Added
 
 	items: (Item | undefined)[];
 	onItemDropAt: (index: number, item: Item) => void;
@@ -22,6 +25,8 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 	onSkillDropAt,
 	onRemoveSkillAt,
 	onClearSkill,
+	skillEnhancements,
+	skillRemarks, // Added
 
 	items,
 	onItemDropAt,
@@ -41,9 +46,14 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 						allowedSkillType={index < 6 ? "active" : "passive"}
 						showSkillName={false}
 						isBuilder={true}
+						isArray={skillEnhancements[index]?.isArray ?? false}
+						isGrimoire={skillEnhancements[index]?.isGrimoire ?? false}
 					/>
 				))}
-
+				{/* Remarks Display integrated here */}
+				<div className="col-span-6">
+					<RemarksDisplay skillsInPanel={skills} remarks={skillRemarks} />
+				</div>
 				<Button onClick={onClearSkill} className="col-span-6">
 					{t("clearSkills")}
 				</Button>

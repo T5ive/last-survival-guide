@@ -13,6 +13,8 @@ interface SkillSlotProps {
 	showSkillType?: boolean;
 	showSkillName?: boolean;
 	isBuilder: boolean;
+	isArray?: boolean; // Added
+	isGrimoire?: boolean; // Added
 }
 
 const SkillSlot: React.FC<SkillSlotProps> = ({
@@ -24,6 +26,8 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 	showSkillType = false,
 	showSkillName = false,
 	isBuilder,
+	isArray, // Added
+	isGrimoire, // Added
 }) => {
 	const { t } = useLanguage();
 	const { setDraggingObject, draggingObject } = useDragContext();
@@ -106,6 +110,23 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 						<div className="absolute bottom-1 text-center bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full text-xs">
 							{skill.name}
 						</div>
+					)}
+					{/* Enhancement Stars */}
+					{isArray && (
+						<span
+							className="absolute bottom-1 left-1 text-red-500 text-lg"
+							title={t("arrayTab")} // Or a more specific title if needed
+						>
+							★
+						</span>
+					)}
+					{isGrimoire && (
+						<span
+							className="absolute bottom-1 right-1 text-purple-500 text-lg"
+							title={t("grimoireTab")} // Or a more specific title if needed
+						>
+							★
+						</span>
 					)}
 				</>
 			) : (
