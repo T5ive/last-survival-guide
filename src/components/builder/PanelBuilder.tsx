@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import ItemSlot from "./items/ItemSlot";
-import RemarksDisplay from "./remark/RemarksDisplay"; // Added
+import RemarksDisplay from "./remarks/RemarksDisplay"; // Added
 import SkillSlot from "./skills/SkillSlot";
 
 interface PanelBuilderProps {

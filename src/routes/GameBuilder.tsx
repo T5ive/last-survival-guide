@@ -1,13 +1,13 @@
-import PanelArray from "@/components/builder/array/PanelArray";
-import PanelArray from "@/components/builder/array/PanelArray";
+import PanelArray from "@/components/builder/arrays/PanelArray";
+import PanelArray from "@/components/builder/arrays/PanelArray";
 import PanelBuilder from "@/components/builder/PanelBuilder";
-import PanelGrimoire from "@/components/builder/grimoire/PanelGrimoire";
+import PanelGrimoire from "@/components/builder/grimoires/PanelGrimoire";
 import PanelItem from "@/components/builder/items/PanelItem";
-import PanelArray from "@/components/builder/array/PanelArray";
+import PanelArray from "@/components/builder/arrays/PanelArray";
 import PanelBuilder from "@/components/builder/PanelBuilder";
-import PanelGrimoire from "@/components/builder/grimoire/PanelGrimoire";
+import PanelGrimoire from "@/components/builder/grimoires/PanelGrimoire";
 import PanelItem from "@/components/builder/items/PanelItem";
-import PanelRemark from "@/components/builder/remark/PanelRemark";
+import PanelRemark from "@/components/builder/remarks/PanelRemark";
 import PanelSkill from "@/components/builder/skills/PanelSkill";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Added
