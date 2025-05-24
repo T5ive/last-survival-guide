@@ -2,17 +2,15 @@ import PanelBuilder from "@/components/builder/PanelBuilder";
 import PanelItem from "@/components/builder/items/PanelItem";
 import PanelSkill from "@/components/builder/skills/PanelSkill";
 import { Button } from "@/components/ui/button";
-import { DragProvider, isItem, isSkill, useDragContext } from "@/context/DragContext";
+import { DragProvider } from "@/context/DragContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { allItems } from "@/data/items";
 import { allSkills } from "@/data/skills";
-import useBreakpoints from "@/hooks/useBreakpoints";
-import { cn } from "@/lib/utils";
 import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import { createFileRoute } from "@tanstack/react-router";
 import html2canvas from "html2canvas-pro";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export const Route = createFileRoute("/GameBuilder")({
 	component: GameBuilder,
@@ -24,29 +22,6 @@ function GameBuilder() {
 	const [activeTab, setActiveTab] = useState<"skills" | "items">("skills");
 	const [usedSkills, setUsedSkills] = useState<(Skill | undefined)[]>(Array(12).fill(undefined));
 	const [usedItems, setUsedItems] = useState<(Item | undefined)[]>(Array(6).fill(undefined));
-
-	const { draggingObject } = useDragContext();
-	const [isSourceListHidden, setIsSourceListHidden] = useState(false);
-	const { isUnderSm, isSm, isMd, isLg, isXl, is2xl } = useBreakpoints();
-
-	//TODO
-	useEffect(() => {
-		if (draggingObject) {
-			if (isSm) {
-				if (activeTab === "skills" && isSkill(draggingObject)) {
-					setIsSourceListHidden(true);
-				} else if (activeTab === "items" && isItem(draggingObject)) {
-					setIsSourceListHidden(true);
-				} else {
-					setIsSourceListHidden(false); // Different type is being dragged, or different tab
-				}
-			} else {
-				setIsSourceListHidden(false); // Not a small screen, so source list should not be hidden by this logic
-			}
-		} else {
-			setIsSourceListHidden(false); // Drag ended
-		}
-	}, [draggingObject, activeTab, isSm]);
 
 	const handleSkillDropAt = (targetIndex: number, droppedSkill: Skill) => {
 		const fromIndex = usedSkills.findIndex((s) => s?.id === droppedSkill.id);
@@ -191,16 +166,8 @@ function GameBuilder() {
 						</div>
 
 						{/* Tab Content */}
-						{activeTab === "skills" && (
-							<div className={cn({ hidden: isSourceListHidden })}>
-								<PanelSkill availableSkills={availableSkills} />
-							</div>
-						)}
-						{activeTab === "items" && (
-							<div className={cn({ hidden: isSourceListHidden })}>
-								<PanelItem availableItems={availableItems} />
-							</div>
-						)}
+						{activeTab === "skills" && <PanelSkill availableSkills={availableSkills} />}
+						{activeTab === "items" && <PanelItem availableItems={availableItems} />}
 					</div>
 					<div className="min-w-0">
 						<div className="flex flex-col sm:flex-row gap-2 justify-end mb-4">
