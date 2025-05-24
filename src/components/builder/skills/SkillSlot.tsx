@@ -35,7 +35,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 	const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 
-		if (!isSkill(draggingObject)) {
+		if (!isSkill(draggingObject) || !isBuilder) {
 			e.dataTransfer.dropEffect = "none";
 			return;
 		}
