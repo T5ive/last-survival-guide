@@ -18,7 +18,7 @@ const RemarksDisplay: React.FC<RemarksDisplayProps> = ({ skillsInPanel, remarks 
 		.filter((item) => item.skill && item.remark && item.remark.trim() !== "");
 
 	if (skillsWithRemarks.length === 0) {
-		return <div className="text-sm text-muted-foreground italic text-center py-2 mb-2">{t("noRemarksAdded")}</div>;
+		return <div className="text-sm text-muted-foreground italic text-center py-2">{t("noRemarksAdded")}</div>;
 	}
 
 	return (
