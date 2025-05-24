@@ -2,27 +2,7 @@ import { Link } from "@tanstack/react-router";
 import ThemeToggle from "./ui/ThemeToggle";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/context/LanguageContext";
-
-// Simple Globe Icon SVG
-const GlobeIcon = () => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		width="20"
-		height="20"
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		strokeWidth="2"
-		strokeLinecap="round"
-		strokeLinejoin="round"
-		className="lucide lucide-globe"
-	>
-		<title>Localize</title>
-		<circle cx="12" cy="12" r="10" />
-		<path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-		<path d="M2 12h20" />
-	</svg>
-);
+import { GlobeIcon } from "lucide-react";
 
 // Simple GitHub Icon SVG
 const GitHubIcon = () => (
@@ -53,7 +33,7 @@ export default function Header() {
 
 	return (
 		<header className="p-2 flex flex-col sm:flex-row gap-2 justify-between items-center">
-			<nav className="flex flex-col sm:flex-row">
+			<nav className="flex sm:flex-row">
 				<div className="px-2 font-bold">
 					<Link to="/">{t("home")}</Link>
 				</div>

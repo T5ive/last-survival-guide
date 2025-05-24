@@ -30,7 +30,6 @@ pnpm build
 - [ ] Tricks
 
 ## General
-- [ ] Update Navbar UX
 - [ ] Add Change logs page
 - [ ] Add Builder by Community
 - [ ] Add Guide Page by Community
