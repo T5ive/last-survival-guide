@@ -54,6 +54,9 @@ function GameBuilder() {
 	const [isLoadModalOpen, setLoadModalOpen] = useState<boolean>(false);
 	const [isImportModalOpen, setImportModalOpen] = useState<boolean>(false);
 
+	const isEmptySkill = usedSkills.every((skill) => skill === undefined);
+	const isEmptyItem = usedItems.every((item) => item === undefined);
+
 	// useEffect for Loading Saved Builds on Mount
 	useEffect(() => {
 		try {
@@ -252,27 +255,52 @@ function GameBuilder() {
 
 	const handleSaveBuild = () => {
 		if (!buildName.trim()) {
-			toast.warning(t("buildNameRequired"));
+			toast.error(t("buildNameRequired"));
 			return;
 		}
+
+		if (isEmptySkill || isEmptyItem) {
+			toast.error(t("buildRequired"));
+			return;
+		}
+
+		const existingIndex = savedBuilds.findIndex((b) => b.name === buildName.trim());
+
 		const newBuild: Build = {
-			name: buildName,
+			name: buildName.trim(),
 			timestamp: new Date().toISOString(),
 			usedSkills,
 			usedItems,
 			skillEnhancements,
 			skillRemarks,
 		};
-		const updatedBuilds = [...savedBuilds, newBuild];
-		try {
-			setSavedBuilds(updatedBuilds);
-			localStorage.setItem("savedGameBuilds", JSON.stringify(updatedBuilds));
-			setBuildName("");
-			setSaveModalOpen(false);
-			toast.success(t("buildSaved"));
-		} catch (error) {
-			console.error("Failed to save build:", error);
-			toast.error(t("errorSavingBuild"));
+
+		const save = () => {
+			const updatedBuilds = [...savedBuilds];
+			if (existingIndex !== -1) {
+				updatedBuilds[existingIndex] = newBuild; // แทนที่ตัวเดิม
+			} else {
+				updatedBuilds.push(newBuild); // เพิ่มใหม่
+			}
+			try {
+				setSavedBuilds(updatedBuilds);
+				localStorage.setItem("savedGameBuilds", JSON.stringify(updatedBuilds));
+				setBuildName("");
+				setSaveModalOpen(false);
+				toast.success(t("buildSaved"));
+			} catch (error) {
+				console.error("Failed to save build:", error);
+				toast.error(t("errorSavingBuild"));
+			}
+		};
+
+		if (existingIndex !== -1) {
+			const confirmOverwrite = window.confirm(t("buildNameExistsOverwrite"));
+			if (confirmOverwrite) {
+				save();
+			}
+		} else {
+			save();
 		}
 	};
 
@@ -297,6 +325,11 @@ function GameBuilder() {
 	};
 
 	const handleShareBuild = () => {
+		if (isEmptySkill || isEmptyItem) {
+			toast.error(t("buildRequired"));
+			return;
+		}
+
 		const currentBuildObject = {
 			usedSkills,
 			usedItems,
