@@ -13,8 +13,8 @@ export const translations = {
     // GameBuilder page
     skills: "Skills",
     items: "Items",
-    download: "Download",
-    copy: "Copy",
+    downloadImage: "Download Img",
+    copyImage: "Copy Img",
 
     // PanelBuilder (optional for now, but good to have)
     clearSkills: "Clear Skills",
@@ -42,10 +42,8 @@ export const translations = {
     miniPanelDragHelper: "Quick Drag Panel",
     arrayTab: "Array",
     grimoireTab: "Grimoire",
-    addToArray: "Add to Array",
-    removeFromArray: "Remove from Array",
-    addToGrimoire: "Add to Grimoire",
-    removeFromGrimoire: "Remove from Grimoire",
+    add: "Add",
+    remove: "Remove",
     remarkTab: "Remark",
     noRemarksAdded: "No remarks added.",
     addRemarkPlaceholder: "Type your remark here...",
@@ -89,8 +87,8 @@ export const translations = {
     // GameBuilder page
     skills: "ทักษะ",
     items: "ไอเทม",
-    download: "ดาวน์โหลด",
-    copy: "คัดลอก",
+    downloadImage: "ดาวน์โหลดรูป",
+    copyImage: "คัดลอกรูป",
 
     // PanelBuilder (optional for now, but good to have)
     clearSkills: "ล้างทักษะ",

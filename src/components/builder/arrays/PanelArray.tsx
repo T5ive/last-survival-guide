@@ -35,7 +35,7 @@ const PanelArray: React.FC<PanelArrayProps> = ({ skillsInPanel, enhancements, on
 									className="w-full mt-2 text-xs"
 									size="sm"
 								>
-									{enhancements[index]?.isArray ? t("removeFromArray") : t("addToArray")}
+									{enhancements[index]?.isArray ? t("remove") : t("add")}
 								</Button>
 							</>
 						) : (

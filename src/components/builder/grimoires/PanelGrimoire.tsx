@@ -35,7 +35,7 @@ const PanelGrimoire: React.FC<PanelGrimoireProps> = ({ skillsInPanel, enhancemen
 									className="w-full mt-2 text-xs"
 									size="sm"
 								>
-									{enhancements[index]?.isGrimoire ? t("removeFromGrimoire") : t("addToGrimoire")}
+									{enhancements[index]?.isGrimoire ? t("remove") : t("add")}
 								</Button>
 							</>
 						) : (
