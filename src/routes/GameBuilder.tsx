@@ -1,9 +1,4 @@
 import PanelArray from "@/components/builder/arrays/PanelArray";
-import PanelArray from "@/components/builder/arrays/PanelArray";
-import PanelBuilder from "@/components/builder/PanelBuilder";
-import PanelGrimoire from "@/components/builder/grimoires/PanelGrimoire";
-import PanelItem from "@/components/builder/items/PanelItem";
-import PanelArray from "@/components/builder/arrays/PanelArray";
 import PanelBuilder from "@/components/builder/PanelBuilder";
 import PanelGrimoire from "@/components/builder/grimoires/PanelGrimoire";
 import PanelItem from "@/components/builder/items/PanelItem";
@@ -12,7 +7,7 @@ import PanelSkill from "@/components/builder/skills/PanelSkill";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Added
 import { Textarea } from "@/components/ui/textarea"; // Added
-import { DragProvider, useDrag } from "@/context/DragContext";
+import { DragProvider, isSkill, useDragContext } from "@/context/DragContext";
 import { useLanguage } from "@/context/LanguageContext";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import { allItems } from "@/data/items";
@@ -40,7 +35,7 @@ interface Build {
 function GameBuilder() {
 	const { t } = useLanguage();
 	const { isUnderSm } = useBreakpoints();
-	const { draggingObject, isSkill: isDraggingSkill } = useDrag();
+	const { draggingObject } = useDragContext();
 	const panelRef = useRef<HTMLDivElement>(null);
 	const [activeTab, setActiveTab] = useState<"skills" | "items" | "array" | "grimoire" | "remark">("skills");
 	const [usedSkills, setUsedSkills] = useState<(Skill | undefined)[]>(Array(12).fill(undefined));
@@ -70,20 +65,22 @@ function GameBuilder() {
 			// Optionally, clear corrupted data: localStorage.removeItem("savedGameBuilds");
 		}
 	}, []);
-	
-	const applyImportedBuild = (build: Build | Omit<Build, 'name' | 'timestamp'>) => {
+
+	const applyImportedBuild = (build: Build | Omit<Build, "name" | "timestamp">) => {
 		// Validate and set skills
-		const validSkills = build.usedSkills && Array.isArray(build.usedSkills) && build.usedSkills.length === 12 
-			? build.usedSkills.map(s => s ? allSkills.find(as => as.id === s.id) || undefined : undefined) 
-			: Array(12).fill(undefined);
+		const validSkills =
+			build.usedSkills && Array.isArray(build.usedSkills) && build.usedSkills.length === 12
+				? build.usedSkills.map((s) => (s ? allSkills.find((as) => as.id === s.id) || undefined : undefined))
+				: Array(12).fill(undefined);
 		setUsedSkills(validSkills);
-	
+
 		// Validate and set items
-		const validItems = build.usedItems && Array.isArray(build.usedItems) && build.usedItems.length === 6
-			? build.usedItems.map(i => i ? allItems.find(ai => ai.id === i.id) || undefined : undefined)
-			: Array(6).fill(undefined);
+		const validItems =
+			build.usedItems && Array.isArray(build.usedItems) && build.usedItems.length === 6
+				? build.usedItems.map((i) => (i ? allItems.find((ai) => ai.id === i.id) || undefined : undefined))
+				: Array(6).fill(undefined);
 		setUsedItems(validItems);
-	
+
 		setSkillEnhancements(
 			build.skillEnhancements && Array.isArray(build.skillEnhancements) && build.skillEnhancements.length === 12
 				? build.skillEnhancements
@@ -136,7 +133,7 @@ function GameBuilder() {
 	};
 
 	const handleUpdateRemark = (index: number, text: string) => {
-		setSkillRemarks(prev => {
+		setSkillRemarks((prev) => {
 			const newRemarks = [...prev];
 			newRemarks[index] = text;
 			return newRemarks;
@@ -319,7 +316,7 @@ function GameBuilder() {
 				"skillEnhancements" in buildToImport &&
 				"skillRemarks" in buildToImport
 			) {
-				applyImportedBuild(buildToImport as Omit<Build, 'name' | 'timestamp'>); // Type assertion
+				applyImportedBuild(buildToImport as Omit<Build, "name" | "timestamp">); // Type assertion
 				setJsonInput("");
 				setImportModalOpen(false);
 				alert(t("buildImported"));
@@ -395,11 +392,7 @@ function GameBuilder() {
 							/>
 						)}
 						{activeTab === "remark" && (
-							<PanelRemark
-								skillsInPanel={usedSkills}
-								remarks={skillRemarks}
-								onUpdateRemark={handleUpdateRemark}
-							/>
+							<PanelRemark skillsInPanel={usedSkills} remarks={skillRemarks} onUpdateRemark={handleUpdateRemark} />
 						)}
 					</div>
 					<div className="min-w-0">
@@ -436,15 +429,23 @@ function GameBuilder() {
 											<div
 												key={`mini-slot-${index}`}
 												className={`aspect-square bg-muted rounded flex items-center justify-center border ${
-													draggingObject && isDraggingSkill(draggingObject) && ((isActiveSlot && (draggingObject as Skill).type.includes("active")) || (isPassiveSlot && (draggingObject as Skill).type.includes("passive")))
+													draggingObject &&
+													isSkill(draggingObject) &&
+													(
+														(isActiveSlot && (draggingObject as Skill).type.includes("active")) ||
+															(isPassiveSlot && (draggingObject as Skill).type.includes("passive"))
+													)
 														? "border-primary scale-105"
 														: "border-border"
 												} transition-all duration-150`}
 												onDragOver={(e) => {
 													e.preventDefault();
-													if (draggingObject && isDraggingSkill(draggingObject)) {
+													if (draggingObject && isSkill(draggingObject)) {
 														const dragSkill = draggingObject as Skill;
-														if ((isActiveSlot && dragSkill.type.includes("active")) || (isPassiveSlot && dragSkill.type.includes("passive"))) {
+														if (
+															(isActiveSlot && dragSkill.type.includes("active")) ||
+															(isPassiveSlot && dragSkill.type.includes("passive"))
+														) {
 															e.dataTransfer.dropEffect = "move";
 														} else {
 															e.dataTransfer.dropEffect = "none";
@@ -455,9 +456,12 @@ function GameBuilder() {
 												}}
 												onDrop={(e) => {
 													e.preventDefault();
-													if (draggingObject && isDraggingSkill(draggingObject)) {
+													if (draggingObject && isSkill(draggingObject)) {
 														const droppedSkill = draggingObject as Skill;
-														if ((isActiveSlot && droppedSkill.type.includes("active")) || (isPassiveSlot && droppedSkill.type.includes("passive"))) {
+														if (
+															(isActiveSlot && droppedSkill.type.includes("active")) ||
+															(isPassiveSlot && droppedSkill.type.includes("passive"))
+														) {
 															handleSkillDropAt(index, droppedSkill);
 														}
 													}
@@ -504,7 +508,9 @@ function GameBuilder() {
 								className="mb-4"
 							/>
 							<div className="flex justify-end gap-2">
-								<Button variant="outline" onClick={() => setSaveModalOpen(false)}>{t("cancel")}</Button>
+								<Button variant="outline" onClick={() => setSaveModalOpen(false)}>
+									{t("cancel")}
+								</Button>
 								<Button onClick={handleSaveBuild}>{t("save")}</Button>
 							</div>
 						</div>
@@ -529,15 +535,21 @@ function GameBuilder() {
 												</span>
 											</div>
 											<div className="flex gap-2">
-												<Button size="sm" onClick={() => handleLoadBuild(build)}>{t("loadBuild")}</Button>
-												<Button size="sm" variant="destructive" onClick={() => handleDeleteBuild(build.name)}>{t("delete")}</Button>
+												<Button size="sm" onClick={() => handleLoadBuild(build)}>
+													{t("loadBuild")}
+												</Button>
+												<Button size="sm" variant="destructive" onClick={() => handleDeleteBuild(build.name)}>
+													{t("delete")}
+												</Button>
 											</div>
 										</li>
 									))}
 								</ul>
 							)}
 							<div className="flex justify-end mt-4">
-								<Button variant="outline" onClick={() => setLoadModalOpen(false)}>{t("close")}</Button>
+								<Button variant="outline" onClick={() => setLoadModalOpen(false)}>
+									{t("close")}
+								</Button>
 							</div>
 						</div>
 					</div>
@@ -555,7 +567,9 @@ function GameBuilder() {
 								className="mb-4 min-h-[150px]"
 							/>
 							<div className="flex justify-end gap-2">
-								<Button variant="outline" onClick={() => setImportModalOpen(false)}>{t("cancel")}</Button>
+								<Button variant="outline" onClick={() => setImportModalOpen(false)}>
+									{t("cancel")}
+								</Button>
 								<Button onClick={handleImportBuild}>{t("import")}</Button>
 							</div>
 						</div>
