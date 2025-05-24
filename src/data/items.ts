@@ -8,7 +8,7 @@ export const itemsTierS = [
   { id: "ballista", name: "Ballista", tier: "S", imageUrl: `${basePath}/images/items/S/ballista.png` },
   { id: "desolator_2", name: "Desolator 2", tier: "S", imageUrl: `${basePath}/images/items/S/desolator_2.png` },
   { id: "dragon_scale", name: "Dragon Scale", tier: "S", imageUrl: `${basePath}/images/items/S/dragon_scale.png` },
-  { id: "enhancement_evolved", name: "Enhancement Evolved", tier: "S", imageUrl: `${basePath}/images/items/S/enhancement_evolved.png` },
+  { id: "enhancement_evolved", name: "Apex", tier: "S", imageUrl: `${basePath}/images/items/S/enhancement_evolved.png` },
   { id: "gleipnir", name: "Gleipnir", tier: "S", imageUrl: `${basePath}/images/items/S/gleipnir.png` },
   { id: "mjollnir", name: "Mjollnir", tier: "S", imageUrl: `${basePath}/images/items/S/mjollnir.png` },
   { id: "nullifier", name: "Nullifier", tier: "S", imageUrl: `${basePath}/images/items/S/nullifier.png` },
