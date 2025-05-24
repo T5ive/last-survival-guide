@@ -513,7 +513,7 @@ function GameBuilder() {
 										<li key={build.timestamp} className="flex justify-between items-center p-2 border rounded-md">
 											<div>
 												<span className="font-medium">{build.name}</span>
-												<span className="text-xs text-muted-foreground ml-2">
+												<span className="text-xs text-secondary-foreground ml-2">
 													{new Date(build.timestamp).toLocaleString()}
 												</span>
 											</div>

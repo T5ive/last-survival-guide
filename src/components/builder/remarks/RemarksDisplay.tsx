@@ -48,7 +48,7 @@ const RemarksDisplay: React.FC<RemarksDisplayProps> = ({ skillsInPanel, remarks 
 					<img src={skill!.imageUrl} alt={skill!.name} className="w-8 h-8 object-contain mr-2 flex-shrink-0 rounded" />
 					<div className="align-text-bottom">
 						<span className="font-semibold">{skill!.name}:</span>
-						<span className="ml-1 text-muted-foreground break-words">{remark}</span>
+						<span className="ml-1 text-secondary-foreground break-words">{remark}</span>
 					</div>
 				</div>
 			))}

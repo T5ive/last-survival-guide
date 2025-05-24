@@ -101,13 +101,13 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 					)}
 
 					{showSkillType && (
-						<div className="absolute top-1 right-1 bg-muted text-muted-foreground px-1 py-0.5 rounded-full text-xs">
+						<div className="absolute top-1 right-1 bg-muted text-secondary-foreground px-1 py-0.5 rounded-full text-xs">
 							{skill.type.charAt(0).toUpperCase() +
 								skill.type.slice(1).replaceAll("basic", "").replaceAll("evo", "").replaceAll("awake", "")}
 						</div>
 					)}
 					{showSkillName && (
-						<div className="absolute bottom-1 text-center bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full text-xs">
+						<div className="absolute bottom-1 text-center bg-muted text-secondary-foreground px-1.5 py-0.5 rounded-full text-xs">
 							{skill.name}
 						</div>
 					)}
@@ -138,7 +138,7 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 					)}
 				</>
 			) : (
-				<div className="text-muted-foreground text-sm">{t("emptySlot")}</div>
+				<div className="text-secondary-foreground text-sm">{t("emptySlot")}</div>
 			)}
 		</div>
 	);
