@@ -40,6 +40,9 @@ export default function Header() {
 				<div className="px-2 font-bold">
 					<Link to="/GameBuilder">{t("gameBuilder")}</Link>
 				</div>
+				<div className="px-2 font-bold">
+					<Link to="/Changelog">{t("changelog")}</Link>
+				</div>
 			</nav>
 			<div className="flex items-center gap-1 sm:gap-2">
 				<Button variant="ghost" size="sm" aria-label={t("selectLanguage")} onClick={toggleLanguage}>

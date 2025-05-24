@@ -30,6 +30,5 @@ pnpm build
 - [ ] Tricks
 
 ## General
-- [ ] Add Change logs page
 - [ ] Add Builder by Community
 - [ ] Add Guide Page by Community

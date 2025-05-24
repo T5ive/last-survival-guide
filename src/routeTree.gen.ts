@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as GameBuilderImport } from './routes/GameBuilder'
+import { Route as ChangelogImport } from './routes/Changelog'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -19,6 +20,12 @@ import { Route as IndexImport } from './routes/index'
 const GameBuilderRoute = GameBuilderImport.update({
   id: '/GameBuilder',
   path: '/GameBuilder',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ChangelogRoute = ChangelogImport.update({
+  id: '/Changelog',
+  path: '/Changelog',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,6 +46,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/Changelog': {
+      id: '/Changelog'
+      path: '/Changelog'
+      fullPath: '/Changelog'
+      preLoaderRoute: typeof ChangelogImport
+      parentRoute: typeof rootRoute
+    }
     '/GameBuilder': {
       id: '/GameBuilder'
       path: '/GameBuilder'
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/GameBuilder'
+  fullPaths: '/' | '/Changelog' | '/GameBuilder'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/GameBuilder'
-  id: '__root__' | '/' | '/GameBuilder'
+  to: '/' | '/Changelog' | '/GameBuilder'
+  id: '__root__' | '/' | '/Changelog' | '/GameBuilder'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChangelogRoute: typeof ChangelogRoute
   GameBuilderRoute: typeof GameBuilderRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChangelogRoute: ChangelogRoute,
   GameBuilderRoute: GameBuilderRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/Changelog",
         "/GameBuilder"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/Changelog": {
+      "filePath": "Changelog.tsx"
     },
     "/GameBuilder": {
       "filePath": "GameBuilder.tsx"

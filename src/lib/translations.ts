@@ -3,6 +3,7 @@ export const translations = {
     // Header
     home: "Home",
     gameBuilder: "Game Builder",
+    changelog: "Changelog",
     selectLanguage: "Select language",
     viewSource: "View source on GitHub",
 
@@ -79,6 +80,7 @@ export const translations = {
     // Header
     home: "หน้าแรก",
     gameBuilder: "สร้างเกม",
+    changelog: "Changelog",
     selectLanguage: "เลือกภาษา",
     viewSource: "ดูซอร์สโค้ดบน GitHub",
 
