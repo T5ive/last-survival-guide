@@ -104,7 +104,7 @@ code {
 	--muted-foreground: oklch(0.45 0.005 240); /* Medium-light gray */
 	--accent: oklch(0.5 0.65 200); /* Muted light teal */
 	--accent-foreground: oklch(0.68 0.005 240); /* Dark gray for contrast */
-	--destructive: oklch(0.6 0.18 25); /* Muted red for dark mode */
+	--destructive: oklch(0.56 0.25 25); /* Muted red for dark mode */
 	--border: oklch(0.25 0.005 240); /* Dark gray, slightly lighter than background */
 	--input: oklch(0.28 0.005 240); /* Slightly lighter than border */
 	--ring: oklch(0.65 0.07 230 / 0.5); /* Muted light blue (primary) with some transparency for ring */

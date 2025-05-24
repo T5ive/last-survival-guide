@@ -22,7 +22,7 @@ const RemarksDisplay: React.FC<RemarksDisplayProps> = ({ skillsInPanel, remarks 
 				<span
 					className="w-5 h-5 mr-2 
 							flex items-center justify-center
-							rounded-full bg-red-500 text-white text-sm"
+							rounded-square bg-yellow-500 text-white text-sm"
 				>
 					★
 				</span>
@@ -32,7 +32,7 @@ const RemarksDisplay: React.FC<RemarksDisplayProps> = ({ skillsInPanel, remarks 
 				<span
 					className="w-5 h-5 mr-2 
 							flex items-center justify-center
-							rounded-full bg-purple-500 text-white text-sm"
+							rounded-square bg-purple-500 text-white text-sm"
 				>
 					★
 				</span>
