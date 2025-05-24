@@ -3,6 +3,7 @@ import { isSkill, useDragContext } from "@/context/DragContext";
 import type { Skill } from "@/types/Skill";
 import type { DragEvent } from "react";
 import { Button } from "../../ui/button";
+
 interface SkillSlotProps {
 	skill?: Skill;
 	onDrop?: (skill: Skill) => void;
@@ -62,12 +63,12 @@ const SkillSlot: React.FC<SkillSlotProps> = ({
 
 	return (
 		<div
-			className={`bg-muted rounded-lg flex items-center justify-center relative ${
+			className={`bg-muted rounded-lg flex items-center justify-center relative w-full aspect-square ${
 				isBuilder
-					? "border-dashed border-2 border-border w-full aspect-square" // Flexible for builder
+					? "border-dashed border-2 border-gray-500"
 					: size === 128
-					? "w-32 h-32" // Default size for non-builder
-					: `w-[${size}px] h-[${size}px]` // Specific size for non-builder
+						? "w-32 h-32" 
+						: `w-[${size}px] h-[${size}px]`
 			}`}
 			onDragOver={handleDragOver}
 			onDrop={handleDrop}
