@@ -39,7 +39,7 @@ const PanelBuilder: React.FC<PanelBuilderProps> = ({
 						onDrop={(droppedSkill) => onSkillDropAt(index, droppedSkill)}
 						onRemove={() => onRemoveSkillAt(index)}
 						allowedSkillType={index < 6 ? "active" : "passive"}
-						showSkillName={true}
+						showSkillName={false}
 						isBuilder={true}
 					/>
 				))}
