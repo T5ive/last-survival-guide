@@ -1,3 +1,7 @@
+## v1.2.1 - 2025-07-09
+
+- Added new skill: Nature's Prophet
+
 ## v1.2.0 - 2025-05-24
 
 - Added new tabs: Array and Grimoire
