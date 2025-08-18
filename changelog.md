@@ -1,3 +1,7 @@
+## v1.2.2 - 2025-08-18
+
+- Added new item: Tome of knowledge
+
 ## v1.2.1 - 2025-07-09
 
 - Added new skill: Nature's Prophet
