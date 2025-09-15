@@ -1,3 +1,7 @@
+## v1.2.3 - 2025-09-15
+
+- Added new skill: Phoenix Spirit
+
 ## v1.2.2 - 2025-08-18
 
 - Added new item: Tome of knowledge
