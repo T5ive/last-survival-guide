@@ -13,27 +13,25 @@
     // Restore path from SPA GitHub Pages redirect if present (see public/404.html)
     (function () {
       var l = window.location;
-      if (l.search && l.search.indexOf('p=') !== -1) {
+      var base = '/last-survival-guide/';
+      // Only run if we're at the base path and p param exists
+      if ((l.pathname === base || l.pathname === base.slice(0, -1)) && l.search && l.search.indexOf('p=') !== -1) {
         var params = new URLSearchParams(l.search);
         var p = params.get('p');
         if (p) {
           var path = decodeURIComponent(p);
-          var base = '/last-survival-guide/';
-          // Ensure we only push if not already at the correct path
           var target = base + path.replace(/^\//, '');
-          // Preserve additional query/hash from params (excluding p)
           params.delete('p');
           var extra = params.toString();
           var hash = l.hash || '';
           var url = target + (extra ? '?' + extra : '') + hash;
-          // Use replace so the extra redirect param isn't in history
           l.replace(url);
         }
       }
     })();
   </script>
   <title>Last Survival Guide</title>
-  <script type="module" crossorigin src="/last-survival-guide/assets/index-Dqg0hePp.js"></script>
+  <script type="module" crossorigin src="/last-survival-guide/assets/index-CqmtsSJX.js"></script>
   <link rel="stylesheet" crossorigin href="/last-survival-guide/assets/index-C8H3q4f2.css">
 </head>
 
