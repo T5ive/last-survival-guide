@@ -1,42 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/last-survival-guide/favicon.ico" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-tsrouter-app" />
-  <link rel="apple-touch-icon" href="/last-survival-guide/logo192.png" />
-  <link rel="manifest" href="/last-survival-guide/manifest.json" />
-  <script>
-    // Restore path from SPA GitHub Pages redirect if present (see public/404.html)
-    (function () {
-      var l = window.location;
-      var base = '/last-survival-guide/';
-      // Only run if we're at the base path and p param exists
-      if ((l.pathname === base || l.pathname === base.slice(0, -1)) && l.search && l.search.indexOf('p=') !== -1) {
-        var params = new URLSearchParams(l.search);
-        var p = params.get('p');
-        if (p) {
-          var path = decodeURIComponent(p);
-          var target = base + path.replace(/^\//, '');
-          params.delete('p');
-          var extra = params.toString();
-          var hash = l.hash || '';
-          var url = target + (extra ? '?' + extra : '') + hash;
-          l.replace(url);
-        }
-      }
-    })();
-  </script>
-  <title>Last Survival Guide</title>
-  <script type="module" crossorigin src="/last-survival-guide/assets/index-CqmtsSJX.js"></script>
-  <link rel="stylesheet" crossorigin href="/last-survival-guide/assets/index-C8H3q4f2.css">
-</head>
-
-<body>
-  <div id="app"></div>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/last-survival-guide/favicon.ico" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-tsrouter-app"
+    />
+    <link rel="apple-touch-icon" href="/last-survival-guide/logo192.png" />
+    <link rel="manifest" href="/last-survival-guide/manifest.json" />
+    <title>Last Survival Guide</title>
+    <script type="module" crossorigin src="/last-survival-guide/assets/index-CdlYCAYi.js"></script>
+    <link rel="stylesheet" crossorigin href="/last-survival-guide/assets/index-C8H3q4f2.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
