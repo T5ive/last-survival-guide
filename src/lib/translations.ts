@@ -16,6 +16,14 @@ export const translations = {
     items: "Items",
     downloadImage: "Download Img",
     copyImage: "Copy Img",
+    quickSave: "Quick Save",
+    exportFile: "Export (.json)",
+    importFile: "Import File",
+    autosave: "Autosave",
+    build: "Build",
+    quickBuild: "Quick Build",
+    edit: "Edit",
+    toggleBuildMenu: "Toggle build menu",
 
     // PanelBuilder (optional for now, but good to have)
     clearSkills: "Clear Skills",
@@ -93,6 +101,14 @@ export const translations = {
     items: "ไอเทม",
     downloadImage: "ดาวน์โหลดรูป",
     copyImage: "คัดลอกรูป",
+    quickSave: "บันทึกด่วน",
+    exportFile: "ส่งออก (.json)",
+    importFile: "นำเข้าไฟล์",
+    autosave: "บันทึกอัตโนมัติ",
+    build: "จัดการ Build",
+    quickBuild: "Build ด่วน",
+    edit: "แก้ไข",
+    toggleBuildMenu: "สลับเมนู Build",
 
     // PanelBuilder (optional for now, but good to have)
     clearSkills: "ล้างทักษะ",
