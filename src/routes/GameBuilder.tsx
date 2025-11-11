@@ -61,8 +61,12 @@ function GameBuilder() {
 	const [editingBuildName, setEditingBuildName] = useState<string>("");
 
 	// Sorting for Load Build modal
-	const [sortBy, setSortBy] = useState<"name" | "timestamp">("timestamp");
+	const [sortBy, setSortBy] = useState<"name" | "timestamp" | "custom">("timestamp");
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+	// Drag & drop state for reordering saved builds
+	const [draggingTimestamp, setDraggingTimestamp] = useState<string | null>(null);
+	const [dragOverTimestamp, setDragOverTimestamp] = useState<string | null>(null);
 
 	const toggleSort = (key: "name" | "timestamp") => {
 		if (sortBy === key) {
@@ -73,7 +77,14 @@ function GameBuilder() {
 		}
 	};
 
+	const setManualOrder = () => {
+		setSortBy("custom");
+	};
+
 	const sortedSavedBuilds = useMemo(() => {
+		// If user selected custom/manual order, respect savedBuilds as-is (this is the persisted order)
+		if (sortBy === "custom") return [...savedBuilds];
+
 		const arr = [...savedBuilds];
 		arr.sort((a, b) => {
 			if (sortBy === "name") {
@@ -92,6 +103,58 @@ function GameBuilder() {
 		});
 		return arr;
 	}, [savedBuilds, sortBy, sortOrder]);
+
+	// Drag handlers: operate on the displayed (sorted) array, then persist the new order
+	const handleDragStart = (e: React.DragEvent, ts: string) => {
+		setDraggingTimestamp(ts);
+		// For Firefox compatibility
+		e.dataTransfer.setData("text/plain", ts);
+		e.dataTransfer.effectAllowed = "move";
+	};
+
+	const handleDragOver = (e: React.DragEvent, ts: string) => {
+		e.preventDefault();
+		setDragOverTimestamp(ts);
+		e.dataTransfer.dropEffect = "move";
+	};
+
+	const handleDrop = (e: React.DragEvent, dropTs: string) => {
+		e.preventDefault();
+		const fromTs = draggingTimestamp ?? e.dataTransfer.getData("text/plain");
+		if (!fromTs) return;
+		if (fromTs === dropTs) {
+			setDraggingTimestamp(null);
+			setDragOverTimestamp(null);
+			return;
+		}
+
+		const arr = [...sortedSavedBuilds];
+		const fromIndex = arr.findIndex((b) => b.timestamp === fromTs);
+		const toIndex = arr.findIndex((b) => b.timestamp === dropTs);
+		if (fromIndex === -1 || toIndex === -1) {
+			setDraggingTimestamp(null);
+			setDragOverTimestamp(null);
+			return;
+		}
+
+		const [moved] = arr.splice(fromIndex, 1);
+		arr.splice(toIndex, 0, moved);
+
+		try {
+			setSavedBuilds(arr);
+			localStorage.setItem("savedGameBuilds", JSON.stringify(arr));
+		} catch (err) {
+			console.error("Failed to persist reordered builds:", err);
+		}
+
+		setDraggingTimestamp(null);
+		setDragOverTimestamp(null);
+	};
+
+	const handleDragEnd = () => {
+		setDraggingTimestamp(null);
+		setDragOverTimestamp(null);
+	};
 
 	const startEditBuildName = (timestamp: string, currentName: string) => {
 		setEditingBuildTimestamp(timestamp);
@@ -786,7 +849,7 @@ function GameBuilder() {
 				{/* Load Build Modal */}
 				{isLoadModalOpen && (
 					<div className="z-50 fixed inset-0 flex justify-center items-center bg-black/50 p-4">
-						<div className="bg-card shadow-xl p-6 rounded-lg w-full max-w-lg max-h-[80vh] overflow-y-auto">
+						<div className="bg-card shadow-xl p-6 rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
 							<h2 className="mb-4 font-semibold text-xl">{t("savedBuilds")}</h2>
 							{/* Sort controls */}
 							<div className="flex justify-between items-center mb-3">
@@ -794,17 +857,24 @@ function GameBuilder() {
 								<div className="flex gap-2">
 									<button
 										type="button"
-										className="hover:bg-accent px-2 py-1 rounded"
+										className={`hover:bg-accent px-2 py-1 rounded ${sortBy === "name" ? "ring-1 ring-accent" : ""}`}
 										onClick={() => toggleSort("name")}
 									>
 										{"Name"} {sortBy === "name" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
 									</button>
 									<button
 										type="button"
-										className="hover:bg-accent px-2 py-1 rounded"
+										className={`hover:bg-accent px-2 py-1 rounded ${sortBy === "timestamp" ? "ring-1 ring-accent" : ""}`}
 										onClick={() => toggleSort("timestamp")}
 									>
 										{"Date"} {sortBy === "timestamp" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+									</button>
+									<button
+										type="button"
+										className={`hover:bg-accent px-2 py-1 rounded ${sortBy === "custom" ? "ring-1 ring-accent" : ""}`}
+										onClick={() => setManualOrder()}
+									>
+										{"Manual"} {sortBy === "custom" ? "✓" : ""}
 									</button>
 								</div>
 							</div>
@@ -812,9 +882,25 @@ function GameBuilder() {
 								<p>{t("noSavedBuilds")}</p>
 							) : (
 								<ul className="space-y-2">
-									{sortedSavedBuilds.map((build) => (
-										<li key={build.timestamp} className="flex justify-between items-center p-2 border rounded-md">
-											<div>
+									{sortedSavedBuilds.map((build, idx) => (
+										<li
+											key={build.timestamp}
+											onDragOver={(e) => handleDragOver(e, build.timestamp)}
+											onDrop={(e) => handleDrop(e, build.timestamp)}
+											className={`flex justify-between items-center p-2 border rounded-md ${draggingTimestamp === build.timestamp ? "opacity-60" : ""} ${dragOverTimestamp === build.timestamp ? "ring-2 ring-accent" : ""}`}
+										>
+											<div className="flex items-center">
+												<span
+													className="mr-2 cursor-grab select-none"
+													draggable
+													onDragStart={(e) => { setManualOrder(); handleDragStart(e, build.timestamp); }}
+													onDragEnd={handleDragEnd}
+													title="Drag to reorder"
+													aria-hidden
+												>
+													☰
+												</span>
+
 												{editingBuildTimestamp === build.timestamp ? (
 													<div className="flex items-center gap-2">
 														<Input
@@ -831,6 +917,7 @@ function GameBuilder() {
 													</div>
 												) : (
 													<>
+														<span className="mr-2 text-secondary-foreground text-sm">{idx + 1}.</span>
 														<span className="font-medium">{build.name}</span>
 														<span className="ml-2 text-secondary-foreground text-xs">
 															{new Date(build.timestamp).toLocaleString()}
@@ -838,12 +925,11 @@ function GameBuilder() {
 													</>
 												)}
 											</div>
+
 											<div className="flex gap-2">
-												{editingBuildTimestamp !== build.timestamp && (
-													<Button size="sm" onClick={() => handleLoadBuild(build)}>
-														{t("loadBuild")}
-													</Button>
-												)}
+												<Button size="sm" onClick={() => handleLoadBuild(build)}>
+													{t("loadBuild")}
+												</Button>
 												{editingBuildTimestamp !== build.timestamp && (
 													<Button size="sm" variant="secondary" onClick={() => startEditBuildName(build.timestamp, build.name)}>
 														{t("edit")}
