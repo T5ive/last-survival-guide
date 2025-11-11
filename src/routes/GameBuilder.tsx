@@ -46,6 +46,8 @@ function GameBuilder() {
 	// State for Saved Builds and UI
 	const [savedBuilds, setSavedBuilds] = useState<Build[]>([]);
 	const [buildName, setBuildName] = useState<string>("");
+	// Remember the most recently loaded build's name to suggest when saving
+	const [lastLoadedBuildName, setLastLoadedBuildName] = useState<string | null>(null);
 	const [jsonInput, setJsonInput] = useState<string>("");
 	const [isSaveModalOpen, setSaveModalOpen] = useState<boolean>(false);
 	const [isLoadModalOpen, setLoadModalOpen] = useState<boolean>(false);
@@ -164,6 +166,11 @@ function GameBuilder() {
 				? build.skillRemarks
 				: Array(12).fill(""),
 		);
+
+		// If the imported build includes a name, remember it as the last loaded name
+		if ((build as Build).name && typeof (build as Build).name === "string") {
+			setLastLoadedBuildName((build as Build).name);
+		}
 	};
 
 	const handleSkillDropAt = (targetIndex: number, droppedSkill: Skill) => {
@@ -376,6 +383,8 @@ function GameBuilder() {
 	const handleLoadBuild = (buildToLoad: Build) => {
 		if (window.confirm(t("confirmLoadBuild"))) {
 			applyImportedBuild(buildToLoad);
+			// remember this as the last loaded build name for save suggestions
+			setLastLoadedBuildName(buildToLoad.name);
 			setLoadModalOpen(false);
 		}
 	};
@@ -659,7 +668,7 @@ function GameBuilder() {
 								</Button>
 								{buildMenuOpen && (
 									<div className="right-0 z-50 absolute bg-card shadow-xl mt-2 p-2 rounded w-44">
-										<button type="button" className="hover:bg-accent p-2 rounded w-full text-left" onClick={() => { setSaveModalOpen(true); setBuildMenuOpen(false); }}>
+										<button type="button" className="hover:bg-accent p-2 rounded w-full text-left" onClick={() => { setBuildName((prev) => (prev.trim() ? prev : (lastLoadedBuildName ?? ""))); setSaveModalOpen(true); setBuildMenuOpen(false); }}>
 											{t("saveBuild")}
 										</button>
 										<button type="button" className="hover:bg-accent p-2 rounded w-full text-left" onClick={() => { setLoadModalOpen(true); setBuildMenuOpen(false); }}>
