@@ -16,7 +16,7 @@ import type { Item } from "@/types/Item";
 import type { Skill } from "@/types/Skill";
 import { createFileRoute } from "@tanstack/react-router";
 import html2canvas from "html2canvas-pro";
-import { useEffect, useRef, useState } from "react"; // Added useEffect
+import { useEffect, useRef, useState, useMemo } from "react"; // Added useEffect
 
 export const Route = createFileRoute("/GameBuilder")({
 	component: GameBuilder,
@@ -59,6 +59,39 @@ function GameBuilder() {
 	// Rename state for saved builds
 	const [editingBuildTimestamp, setEditingBuildTimestamp] = useState<string | null>(null);
 	const [editingBuildName, setEditingBuildName] = useState<string>("");
+
+	// Sorting for Load Build modal
+	const [sortBy, setSortBy] = useState<"name" | "timestamp">("timestamp");
+	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+	const toggleSort = (key: "name" | "timestamp") => {
+		if (sortBy === key) {
+			setSortOrder((s) => (s === "asc" ? "desc" : "asc"));
+		} else {
+			setSortBy(key);
+			setSortOrder("asc");
+		}
+	};
+
+	const sortedSavedBuilds = useMemo(() => {
+		const arr = [...savedBuilds];
+		arr.sort((a, b) => {
+			if (sortBy === "name") {
+				const na = a.name.toLowerCase();
+				const nb = b.name.toLowerCase();
+				if (na < nb) return sortOrder === "asc" ? -1 : 1;
+				if (na > nb) return sortOrder === "asc" ? 1 : -1;
+				return 0;
+			}
+			// sortBy === 'timestamp'
+			const ta = new Date(a.timestamp).getTime();
+			const tb = new Date(b.timestamp).getTime();
+			if (ta < tb) return sortOrder === "asc" ? -1 : 1;
+			if (ta > tb) return sortOrder === "asc" ? 1 : -1;
+			return 0;
+		});
+		return arr;
+	}, [savedBuilds, sortBy, sortOrder]);
 
 	const startEditBuildName = (timestamp: string, currentName: string) => {
 		setEditingBuildTimestamp(timestamp);
@@ -755,11 +788,31 @@ function GameBuilder() {
 					<div className="z-50 fixed inset-0 flex justify-center items-center bg-black/50 p-4">
 						<div className="bg-card shadow-xl p-6 rounded-lg w-full max-w-lg max-h-[80vh] overflow-y-auto">
 							<h2 className="mb-4 font-semibold text-xl">{t("savedBuilds")}</h2>
-							{savedBuilds.length === 0 ? (
+							{/* Sort controls */}
+							<div className="flex justify-between items-center mb-3">
+								<div className="text-secondary-foreground text-sm">{savedBuilds.length} {t("savedBuilds")}</div>
+								<div className="flex gap-2">
+									<button
+										type="button"
+										className="hover:bg-accent px-2 py-1 rounded"
+										onClick={() => toggleSort("name")}
+									>
+										{"Name"} {sortBy === "name" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+									</button>
+									<button
+										type="button"
+										className="hover:bg-accent px-2 py-1 rounded"
+										onClick={() => toggleSort("timestamp")}
+									>
+										{"Date"} {sortBy === "timestamp" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+									</button>
+								</div>
+							</div>
+							{sortedSavedBuilds.length === 0 ? (
 								<p>{t("noSavedBuilds")}</p>
 							) : (
 								<ul className="space-y-2">
-									{savedBuilds.map((build) => (
+									{sortedSavedBuilds.map((build) => (
 										<li key={build.timestamp} className="flex justify-between items-center p-2 border rounded-md">
 											<div>
 												{editingBuildTimestamp === build.timestamp ? (
