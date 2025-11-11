@@ -1,3 +1,7 @@
+## v1.3.2 - 2025-11-11
+
+- Quick Save will always save using the name "Quick Build" followed by the current time.
+
 ## v1.3.1 - 2025-11-11
 
 - Suggest last loaded build name when saving
