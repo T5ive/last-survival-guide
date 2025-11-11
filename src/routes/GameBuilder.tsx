@@ -335,7 +335,7 @@ function GameBuilder() {
 			return;
 		}
 
-		if (isEmptySkill || isEmptyItem) {
+		if (isEmptySkill && isEmptyItem) {
 			toast.error(t("buildRequired"));
 			return;
 		}
@@ -403,7 +403,7 @@ function GameBuilder() {
 	};
 
 	const handleShareBuild = () => {
-		if (isEmptySkill || isEmptyItem) {
+		if (isEmptySkill && isEmptyItem) {
 			toast.error(t("buildRequired"));
 			return;
 		}
@@ -455,7 +455,7 @@ function GameBuilder() {
 
 	// Quick Save (save without modal)
 	const handleQuickSave = () => {
-		if (isEmptySkill || isEmptyItem) {
+		if (isEmptySkill && isEmptyItem) {
 			toast.error(t("buildRequired"));
 			return;
 		}
@@ -498,7 +498,7 @@ function GameBuilder() {
 
 	// Export current build to a file
 	const handleExportToFile = () => {
-		if (isEmptySkill || isEmptyItem) {
+		if (isEmptySkill && isEmptyItem) {
 			toast.error(t("buildRequired"));
 			return;
 		}
