@@ -1,3 +1,7 @@
+## v1.3.0 - 2025-10-17
+
+- Improve Build UI
+
 ## v1.2.3 - 2025-09-15
 
 - Added new skill: Phoenix Spirit
