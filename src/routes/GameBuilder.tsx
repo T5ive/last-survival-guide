@@ -556,7 +556,7 @@ function GameBuilder() {
 			return;
 		}
 
-		const name = buildName.trim() || `Quick Build ${new Date().toLocaleString()}`;
+		const name = `Quick Build ${new Date().toLocaleString()}`;
 		const newBuild: Build = {
 			name,
 			timestamp: new Date().toISOString(),
