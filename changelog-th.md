@@ -1,3 +1,8 @@
+## v1.3.4 - 2025-12-21
+
+- เพิ่มสกิลใหม่: Scorching Pulse
+- เพิ่ม Passive ใหม่: Elemental Separation
+
 ## v1.3.3 - 2025-11-26
 
 - เพิ่มสกิลใหม่: Mechanical March

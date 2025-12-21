@@ -1,3 +1,8 @@
+## v1.3.4 - 2025-12-21
+
+- Added new active skill: Scorching Pulse
+- Added new passive skill: Elemental Separation
+
 ## v1.3.3 - 2025-11-26
 
 - Added new skill: Mechanical March

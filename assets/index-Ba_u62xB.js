@@ -1,0 +1,1 @@
+import{u as n,j as e}from"./index-B5m3HHIx.js";function r(){const{t}=n();return e.jsx("div",{className:"text-center",children:e.jsxs("header",{className:"min-h-screen flex flex-col items-center justify-center bg-background text-foreground text-[calc(10px+2vmin)]",children:[t("home")," "]})})}export{r as component};
