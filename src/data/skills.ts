@@ -8,6 +8,7 @@ export const activeSkills = [
   { id: 'abyssal_underlord_pit_of_malice_basic', name: 'Pit Of Malice', type: 'active basic', imageUrl: `${basePath}/images/skills/active/abyssal_underlord_pit_of_malice.png` },
   { id: 'alchemist_unstable_concoction_basic', name: 'Unstable Concoction', type: 'active basic', imageUrl: `${basePath}/images/skills/active/alchemist_unstable_concoction.png` },
   { id: 'batrider_firefly_basic', name: 'Firefly', type: 'active basic', imageUrl: `${basePath}/images/skills/active/batrider_firefly.png` },
+  { id: 'brewmaster_scorching_pulse_basic', name: 'Scorching Pulse', type: 'active basic', imageUrl: `${basePath}/images/skills/active/brewmaster_scorching_pulse.png` },
   { id: 'centaur_double_edge_basic', name: 'Double Edge', type: 'active basic', imageUrl: `${basePath}/images/skills/active/centaur_double_edge.png` },
   { id: 'centaur_hoof_stomp_basic', name: 'Hoof Stomp', type: 'active basic', imageUrl: `${basePath}/images/skills/active/centaur_hoof_stomp.png` },
   { id: 'crystal_maiden_crystal_nova_basic', name: 'Crystal Nova', type: 'active basic', imageUrl: `${basePath}/images/skills/active/crystal_maiden_crystal_nova.png` },
@@ -54,6 +55,7 @@ export const evoSkills = [
   { id: 'abyssal_underlord_pit_of_malice_evo', name: 'Pit Of Malice', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/abyssal_underlord_pit_of_malice.png` },
   { id: 'alchemist_unstable_concoction_evo', name: 'Unstable Concoction', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/alchemist_unstable_concoction.png` },
   { id: 'batrider_firefly_evo', name: 'Firefly', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/batrider_firefly.png` },
+  { id: 'brewmaster_scorching_pulse_evo', name: 'Scorching Pulse', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/brewmaster_scorching_pulse.png` },
   { id: 'centaur_double_edge_evo', name: 'Double Edge', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/centaur_double_edge.png` },
   { id: 'centaur_hoof_stomp_evo', name: 'Hoof Stomp', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/centaur_hoof_stomp.png` },
   { id: 'crystal_maiden_crystal_nova_evo', name: 'Crystal Nova', type: 'active evo', imageUrl: `${basePath}/images/skills/evo/crystal_maiden_crystal_nova.png` },
@@ -98,6 +100,7 @@ export const awakeSkills = [
   { id: 'abyssal_underlord_firestorm_awake', name: 'Firestorm', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/abyssal_underlord_firestorm.png` },
   { id: 'alchemist_unstable_concoction_awake', name: 'Unstable Concoction', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/alchemist_unstable_concoction.png` },
   { id: 'batrider_firefly_awake', name: 'Firefly', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/batrider_firefly.png` },
+  { id: 'brewmaster_scorching_pulse_awake', name: 'Scorching Pulse', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/brewmaster_scorching_pulse.png` },
   { id: 'centaur_double_edge_awake', name: 'Double Edge', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/centaur_double_edge.png` },
   { id: 'crystal_maiden_crystal_nova_awake', name: 'Crystal Nova', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/crystal_maiden_crystal_nova.png` },
   { id: 'drow_ranger_frost_arrows_awake', name: 'Frost Arrows', type: 'active awake', imageUrl: `${basePath}/images/skills/awake/drow_ranger_frost_arrows.png` },
@@ -146,7 +149,8 @@ export const passiveSkills = [
   { id: 'rune_1016', name: 'Crown of Ice', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1016.png` },
   { id: 'rune_1017', name: 'Darkmoon Totem', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1017.png` },
   { id: 'rune_1018', name: 'Tidal Power', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1018.png` },
-  { id: 'rune_1019', name: 'Nirvana Flame', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1019.png` },  
+  { id: 'rune_1019', name: 'Nirvana Flame', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1019.png` },
+  { id: 'rune_1020', name: 'Elemental Separation', type: 'passive', imageUrl: `${basePath}/images/skills/passive/rune_1020.png` },
 ] as const satisfies readonly Skill[];
 
 export const allSkills: readonly Skill[] = [...activeSkills, ...evoSkills, ...awakeSkills, ...passiveSkills];
