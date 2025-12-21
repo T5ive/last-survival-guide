@@ -8,82 +8,43 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as GameBuilderRouteImport } from './routes/GameBuilder'
+import { Route as ChangelogRouteImport } from './routes/Changelog'
+import { Route as IndexRouteImport } from './routes/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as GameBuilderImport } from './routes/GameBuilder'
-import { Route as ChangelogImport } from './routes/Changelog'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const GameBuilderRoute = GameBuilderImport.update({
+const GameBuilderRoute = GameBuilderRouteImport.update({
   id: '/GameBuilder',
   path: '/GameBuilder',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ChangelogRoute = ChangelogImport.update({
+const ChangelogRoute = ChangelogRouteImport.update({
   id: '/Changelog',
   path: '/Changelog',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/Changelog': {
-      id: '/Changelog'
-      path: '/Changelog'
-      fullPath: '/Changelog'
-      preLoaderRoute: typeof ChangelogImport
-      parentRoute: typeof rootRoute
-    }
-    '/GameBuilder': {
-      id: '/GameBuilder'
-      path: '/GameBuilder'
-      fullPath: '/GameBuilder'
-      preLoaderRoute: typeof GameBuilderImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/Changelog': typeof ChangelogRoute
   '/GameBuilder': typeof GameBuilderRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/Changelog' | '/GameBuilder'
@@ -92,11 +53,36 @@ export interface FileRouteTypes {
   id: '__root__' | '/' | '/Changelog' | '/GameBuilder'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChangelogRoute: typeof ChangelogRoute
   GameBuilderRoute: typeof GameBuilderRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/GameBuilder': {
+      id: '/GameBuilder'
+      path: '/GameBuilder'
+      fullPath: '/GameBuilder'
+      preLoaderRoute: typeof GameBuilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Changelog': {
+      id: '/Changelog'
+      path: '/Changelog'
+      fullPath: '/Changelog'
+      preLoaderRoute: typeof ChangelogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -104,31 +90,6 @@ const rootRouteChildren: RootRouteChildren = {
   ChangelogRoute: ChangelogRoute,
   GameBuilderRoute: GameBuilderRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/Changelog",
-        "/GameBuilder"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/Changelog": {
-      "filePath": "Changelog.tsx"
-    },
-    "/GameBuilder": {
-      "filePath": "GameBuilder.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
