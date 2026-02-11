@@ -1,3 +1,7 @@
+## v1.3.5 - 2026-02-11
+
+- Added new active skill: Stifling Dagger
+
 ## v1.3.4 - 2025-12-21
 
 - Added new active skill: Scorching Pulse
