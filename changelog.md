@@ -1,3 +1,7 @@
+## v1.3.6 - 2026-04-15
+
+- Added new active skill: Unleash Fist
+
 ## v1.3.5 - 2026-02-11
 
 - Added new active skill: Stifling Dagger
